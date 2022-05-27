@@ -1,0 +1,49 @@
+@import '../../assets/style/index.scss';
+
+.job__item.editor {
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
+
+    .job__description {
+        padding: 0 0 24px 10px;
+    }
+
+    .info__wrapper {
+        padding: 0 10px 0 10px;
+
+        .job__info-item {
+        border: 0.5px solid $border-color;
+        border-radius: $border-radius;
+        margin-right: 10px;
+        position: relative;
+        display: inline-block;
+        padding-right: 4px;
+        font-size: 1.2rem;
+        font-weight: 300;
+            
+            span {
+                height: 26px;
+                text-align: center;
+            }
+        }   
+
+        .job__info-item.date {
+            color: #058527;
+        }
+
+        .job__info-item.time {
+            color: #dd4b39;
+        }
+
+        .btn-reminder {
+            height: 24px;
+            align-items: right;
+        }
+    }
+
+    
+}
+

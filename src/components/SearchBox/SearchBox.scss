@@ -1,0 +1,39 @@
+@import '../../assets/style/index.scss';
+
+.search_box {
+    position: relative;
+    height: 30px;
+    width: 250px;
+    display: flex;
+
+    .form-control {
+        position: absolute;
+        font-size: 1.3rem;
+        font-weight: 300;
+        height: 100%;
+        border: none;
+        animation: growUp 0.6s linear;
+    }
+    
+    .form-control:focus {
+        box-shadow: none;
+    }
+    
+    .search_delete {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 0;
+        border: none;
+        background-color: transparent;
+        font-size: 2rem;
+        margin-right: 6px;
+        height: 24px;
+        background: url(../../assets/images/x.svg) no-repeat center;
+    }
+}
+
+
+
+
+

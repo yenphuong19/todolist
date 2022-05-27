@@ -1,0 +1,29 @@
+@import '../../assets/style/index.scss';
+
+.job__add {
+    margin: 10px 48px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    border: none;
+    background-color: transparent;
+    color: #777;
+    font-size: 1.5rem;
+
+    .btn {
+        height: 24px;
+        width: 24px;
+    }
+
+    span {
+        margin-left: 6px;
+    }
+}    
+
+.job__add:hover {
+    color: $primary-color;
+
+    .btn-add {
+        background: url(../../assets/images/add-active.svg) no-repeat center;
+    }
+}

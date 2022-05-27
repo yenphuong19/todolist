@@ -1,0 +1,111 @@
+@import "../../../node_modules/bootstrap/scss/functions";
+@import "../../../node_modules/bootstrap/scss/_variables";
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Poppins:wght@300;400;500;600&family=Roboto:wght@400;500;700;900&display=swap');
+
+$primary-color: #fd7e14;
+$text-color: #333;
+$border-color: #ddd;
+$date-color: #058527;
+$spacing: 12px;
+$border-radius: 4px;
+
+
+@function tint-color($color, $weight) {
+    @return mix(white, $color, $weight)
+};
+
+@function shade-color($color, $weight) {
+    @return mix(black, $color, $weight)
+};
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes growUp {
+    0% {
+        width: 0;
+    }
+    25% {
+        width: 25%;
+    }
+    50% {
+        width: 50%;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+// Global
+html, body {
+    font-family: 'Lato', sans-serif;
+    font-size: 62.5%;
+}
+
+// Icon Button
+.btn {
+    opacity: 0.8;
+    width: 26px;
+    height: 26px;
+}
+.btn:focus {
+    box-shadow: none;
+}
+.btn:hover {
+    background-color: $border-color;
+    opacity: 1;
+}
+
+.column-3 {
+    width: 33.3%;
+}
+
+.btn-add {
+    background: url(../images/add.svg) no-repeat center;
+}
+
+.btn-search {
+    background: url(../images/search.svg) no-repeat center;
+}
+
+.btn-filter {
+    background: url(../images/filter.svg) no-repeat center;
+}
+
+.btn-noti {
+    background: url(../images/bell.svg) no-repeat center;
+}
+
+.btn-edit {
+    background: url(../images/edit.svg) no-repeat center;
+}
+
+.btn-delete {
+    background: url(../images/delete.svg) no-repeat center;
+}
+
+.btn-date {
+    background: url(../images/date.svg) no-repeat center;
+}
+
+.btn-time {
+    background: url(../images/time.svg) no-repeat center;
+}
+
+.btn-repeat {
+    background: url(../images/repeat.svg) no-repeat center;
+}
+
+
+
+
+
+
+
+    

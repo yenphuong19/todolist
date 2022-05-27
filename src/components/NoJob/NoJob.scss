@@ -1,0 +1,12 @@
+.no-job {
+    font-size: 1.6rem;
+    text-align: center;
+    margin-top: 36px;
+
+    .no-job__img {
+        background-image: url(../../assets/images/no-job.svg);
+        background-size: contain;
+        width: 260px;
+        height: 260px;
+    }
+}

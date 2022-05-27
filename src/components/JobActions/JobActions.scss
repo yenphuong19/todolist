@@ -1,0 +1,23 @@
+.job__item-actions {
+    position: absolute;
+    right: 0;
+    margin-right: -4px;
+    display: none;
+
+    .btn {
+        margin: 0 2px 3px 0;
+    }
+    
+}
+
+.job__item-actions.show {
+    display: block;
+}
+
+.btn-reminder {
+    background: url(../../assets/images/remider.svg) no-repeat center;
+}
+
+.btn-reminder.active {
+    background: url(../../assets/images/remider-active.svg) no-repeat center;
+}

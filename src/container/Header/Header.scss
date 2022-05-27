@@ -1,0 +1,60 @@
+@import '../../assets/style/index.scss';
+
+header {
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 0.2px solid rgb(221, 220, 220);
+    background-color: rgb(240, 240, 240);
+    padding: 12px 100px;
+    width: 100%;
+
+    .header__left {
+        display: flex;
+        align-items: center;
+        width: 60%;
+
+        h1 {
+            padding-right: 10px;
+            font-size: 2rem;
+            margin: 0;
+            width: 60px;
+        }
+
+        .btn {
+            height: 24px;
+            width: 24px;
+        }
+
+    }
+
+    .header__right {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+
+        .btn {
+            height: 24px;
+            width: 24px;
+            margin-left: 10px;
+        }
+
+        .avartar {
+            border-radius: 50%;
+            border: 1.5px solid $primary-color;
+            height: 26px;
+            width: 26px;
+            text-align: center;
+            margin-left: 10px;
+            font-size: 1.3rem;
+            line-height: 22px;
+            color: $primary-color;
+        }
+    }
+}
+
+@media (max-width: 740px) {
+    header {
+        padding: 14px 10px;
+    }
+}
