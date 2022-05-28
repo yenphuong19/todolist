@@ -28,7 +28,7 @@ function SearchBox() {
                 className="form-control"
                 value={props.query}
                 onChange={e => handleChange(e)}
-                // onFocusOut={() => props.setMode(MODE_NONE)}
+                onFocusOut={() => props.setMode(MODE_NONE)}
             />
             {
                 show 

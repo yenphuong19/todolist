@@ -1,7 +1,7 @@
 @import '../../assets/style/index.scss';
 
 .job__add {
-    margin: 10px 48px;
+    margin: 8px 28px;
     padding: 0;
     display: flex;
     align-items: center;
@@ -25,5 +25,11 @@
 
     .btn-add {
         background: url(../../assets/images/add-active.svg) no-repeat center;
+    }
+}
+
+@media (max-width: 740px) {
+    .job__add {
+        margin: 8px 18px;
     }
 }

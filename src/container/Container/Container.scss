@@ -1,0 +1,10 @@
+.containers {
+    margin: 20px 20% 0;
+}
+
+// Responsive
+@media (max-width: 740px) {
+    .containers {
+        margin: 20px 0;
+    }
+}

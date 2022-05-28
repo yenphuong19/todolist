@@ -62,3 +62,10 @@ export const getListRender = (list, mode, filter, query) => {
             // }
     }
 }
+
+export const getNewId = (items) => {
+    const newItems = items.map(item => item.id)
+    const maxInNewItems = Math.max.apply(Math, newItems)
+    const newId = maxInNewItems + 1
+    return newId
+}

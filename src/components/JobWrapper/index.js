@@ -4,6 +4,7 @@ import JobEditor from '../JobEditor/index';
 import ButtonRounded from '../ButtonRounded/index';
 import { Context, RenderContext } from '../../services/Context';
 import { MODE_EDIT } from '../../services/mode';
+import JobAdd from '../JobAdd';
 
 function JobWrapper () {
     const [props] = useContext(Context)
@@ -19,6 +20,12 @@ function JobWrapper () {
         )
     } 
         
+    if (job.id === null) {
+        return (
+            <JobAdd />
+        )
+    }
+
     return <JobView />
 }
 

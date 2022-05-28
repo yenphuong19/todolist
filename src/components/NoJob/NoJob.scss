@@ -2,11 +2,14 @@
     font-size: 1.6rem;
     text-align: center;
     margin-top: 36px;
+    font-weight: 300;
 
     .no-job__img {
         background-image: url(../../assets/images/no-job.svg);
-        background-size: contain;
-        width: 260px;
+        background-size: cover;
+        width: 300px;
         height: 260px;
+        outline: none;
+        margin-bottom: 16px;
     }
 }

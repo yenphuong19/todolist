@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Context, RenderContext } from '../../services/Context';
-import { MODE_EDIT } from '../../services/mode';
+import { MODE_NONE } from '../../services/mode';
 import { changeDescription } from '../../services/reducer';
 import './JobDescription.scss';
 
@@ -16,7 +16,7 @@ function JobDescription () {
     )
    
     // Khi edit job >> render ô input có thể chỉnh sửa
-    if (props.mode === MODE_EDIT && job.edited) {
+    if (props.mode !== MODE_NONE && job.edited) {
         return (
             <input 
                 className='job__description editor'

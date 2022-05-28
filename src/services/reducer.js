@@ -1,4 +1,15 @@
+import { getNewId  } from "./todo"
+
 // InitState
+const job = {
+    id: null,
+    name: '', 
+    description: '',
+    date: new Date(), 
+    repeat: 'None', 
+    edited: false
+}
+
 const jobs = [
     {
         id: 1,
@@ -38,23 +49,17 @@ const jobs = [
     },
     {
         id: 5,
-        name: 'Stydy hard, play hard', 
+        name: 'Study hard, play hard', 
         description: '',
         date: new Date(2022, 6, 12),
         time: '',
         repeat: 'Daily',
         edited: false,
     },
-]
+].concat(job)
 
 export const initState = {
-    job: {
-        name: '', 
-        description: '',
-        date: new Date(), 
-        repeat: 'None', 
-        edited: false
-    },
+    job: job,
     jobs: {
         completed: [],
         withoutUpdate: jobs,
@@ -193,12 +198,9 @@ export default function reducer (state, action) {
             }
 
         case ADD_JOB:
-            newJobsAll.push({
-                name: action.payload.name, 
-                description: action.payload.description,
-                date: action.payload.date,
-                time: '',
-                repeat: action.payload.repeat,
+            newJobsAll.splice(newJobsAll.length - 1, 0, {
+                ...action.payload,
+                id: getNewId(newJobsAll),
                 edited:false
             })
             return {

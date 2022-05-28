@@ -3,9 +3,8 @@
 .job__item {
     display: flex; 
     position: relative;
-    margin: 8px 30px;
-    padding: 8px 0;
-    border-bottom: 0.2px solid rgb(221, 220, 220);
+    padding: 12px 0;
+    border-bottom: 0.5px solid $line-color;
 
     .job__item-checkbox {
         margin-top: 3px;
@@ -26,3 +25,10 @@
             }
         }
     }
+
+// Responsive
+@media (max-width: 740px) {
+    .job__item {
+        margin: 0 20px;
+    }
+}

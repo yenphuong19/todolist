@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Context, RenderContext } from '../../services/Context';
-import { MODE_CREATE, MODE_EDIT } from '../../services/mode';
+import { MODE_NONE, MODE_CREATE, MODE_EDIT } from '../../services/mode';
 import { changeName } from '../../services/reducer';
 import './JobName.scss';
 
@@ -9,7 +9,7 @@ function JobName () {
     const [job, index] = useContext(RenderContext)
 
     // Khi action edit job >> render ô input có thể chỉnh sửa
-    if (props.mode === MODE_EDIT && job.edited) {
+    if (props.mode !== MODE_NONE && job.edited) {
         return (
             <input 
                 className="job__name editor"
