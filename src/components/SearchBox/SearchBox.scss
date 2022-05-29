@@ -11,12 +11,13 @@
         font-size: 1.3rem;
         font-weight: 300;
         height: 100%;
-        border: none;
+        border: 1px solid transparent;
         animation: growUp 0.6s linear;
     }
     
     .form-control:focus {
-        box-shadow: none;
+        box-shadow: 0 0 4px $hover-color;
+        border: 1px solid $primary-color;
     }
     
     .search_delete {

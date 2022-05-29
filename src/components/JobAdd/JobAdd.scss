@@ -26,6 +26,7 @@
 
 .job__add:hover {
     color: $primary-color;
+    cursor: pointer;
 
     .btn-add {
         background: url(../../assets/images/add-active.svg) no-repeat center;

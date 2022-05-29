@@ -16,7 +16,7 @@ function JobView () {
     return (
         <li 
             className="job__item"
-            onMouseOver={() => props.setShowJobActions(job.name)}
+            onMouseOver={() => props.setShowJobActions(job.id)}
             onMouseOut={() => props.setShowJobActions()}
         >
 

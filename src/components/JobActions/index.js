@@ -9,7 +9,7 @@ function JobActions () {
     const [props] = useContext(Context)
     const [job, index] = useContext(RenderContext)
     return (
-        <div className={`job__item-actions ${props.showJobActions === job.name ? 'show' : ''}`}>
+        <div className={`job__item-actions ${props.showJobActions === job.id ? 'show' : ''}`}>
             <Reminder />
             <Edit />
             <Delete />
