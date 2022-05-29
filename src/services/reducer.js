@@ -75,15 +75,19 @@ export const initState = {
 
 
 // Action
-export const SET_JOB = 'set_job'
-export const setJob = (name, date, time, repeat, edited) => {
+export const SET_NAME = 'set_name'
+export const setName = payload => {
     return {
-        type: SET_JOB, 
-        name,
-        date,
-        time,
-        repeat,
-        edited
+        type: SET_NAME, 
+        payload
+    }
+}
+
+export const SET_DESCRIPTION = 'set_description'
+export const setDescription = payload => {
+    return {
+        type: SET_DESCRIPTION, 
+        payload
     }
 }
 
@@ -182,24 +186,27 @@ export default function reducer (state, action) {
 
     switch (action.type) {
 
-        case SET_JOB:
-            let newJob = {
-                    name: action.name, 
-                    description: action.description,
-                    date: action.date,
-                    time: action.time,
-                    repeat: action.repeat,
-                    edited: action.edited
-                }
-            
+        case SET_NAME:
             return {
                 ...state,
-                job: newJob
+                job: {
+                    ...state.job,
+                    name: action.payload, 
+                }
+            }
+
+        case SET_DESCRIPTION:
+            return {
+                ...state,
+                job: {
+                    ...state.job,
+                    description: action.payload, 
+                }
             }
 
         case ADD_JOB:
             newJobsAll.splice(newJobsAll.length - 1, 0, {
-                ...action.payload,
+                ...state.job,
                 id: getNewId(newJobsAll),
                 edited:false
             })
@@ -291,7 +298,7 @@ export default function reducer (state, action) {
             let newJobsUpdateRepeat = newJobsAll.map(job => {
                 return {
                     ...job,
-                    repeat: action.payload.name === job.name ? action.repeat : job.repeat,
+                    repeat: action.payload.id === job.id ? action.repeat : job.repeat,
                 }
             })
             return {
@@ -306,7 +313,7 @@ export default function reducer (state, action) {
             let newJobsUpdateDate = newJobsAll.map(job => {
                 return {
                    ...job,
-                    date: action.payload.name === job.name ? action.date : job.date,
+                    date: action.payload.id === job.id ? action.date : job.date,
                 }
             })
             return {

@@ -1,7 +1,8 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Context, RenderContext } from '../../services/Context';
 import { MODE_NONE } from '../../services/mode';
-import { changeDescription } from '../../services/reducer';
+import DescriptionEditor from './DescriptionEditor';
+import DescriptionView from './DescriptionView';
 import './JobDescription.scss';
 
 function JobDescription () {
@@ -17,23 +18,10 @@ function JobDescription () {
    
     // Khi edit job >> render ô input có thể chỉnh sửa
     if (props.mode !== MODE_NONE && job.edited) {
-        return (
-            <input 
-                className='job__description editor'
-                placeholder="Description"
-                value={job.description}
-                onChange={e => props.dispatch(changeDescription(e.target.value, index)) }
-            />
-        )
+        return <DescriptionEditor />
     }
 
-    return (
-        <input 
-            disabled
-            className={`job__description ${showJobDescription ? '' : 'hidden'}`}
-            value={job.description}
-        />
-    )
+    return (showJobDescription ? <DescriptionView /> : '')
 
 }
 

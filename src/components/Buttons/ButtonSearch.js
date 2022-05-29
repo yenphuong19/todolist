@@ -1,4 +1,4 @@
-import React, { memo, useContext } from 'react';
+import React, { memo, useContext, useEffect } from 'react';
 import { Context } from '../../services/Context';
 import SearchBox from '../SearchBox/index';
 import { MODE_SEARCH } from '../../services/mode';
@@ -12,7 +12,9 @@ function ButtonSearch () {
     return (
         <button 
             className="btn btn-search"
-            onClick={() => props.setMode(MODE_SEARCH)}
+            onClick={() => {
+                props.setMode(MODE_SEARCH)
+            }}
         ></button>
     )
 }
