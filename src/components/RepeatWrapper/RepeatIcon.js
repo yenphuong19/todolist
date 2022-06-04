@@ -1,19 +1,9 @@
-import React, { useContext } from "react";
-import { Context } from "../../services/Context";
+import React, { memo } from "react";
 
 function RepeatIcon () {
-    const [props] = useContext(Context)
     return (
-        <button 
-            className="btn btn-repeat"
-            onClick={() => {
-                props.setShowRepeat(!props.showRepeat);
-                // Khi click vào repeatList >> ẩn picker khác
-                props.setShowDayPicker(false)
-                props.setShowTimePicker(false)
-            }}
-        ></button>
+        <svg className="job__info-icon repeat__icon"></svg>
     )
 }
 
-export default RepeatIcon;
+export default memo(RepeatIcon);

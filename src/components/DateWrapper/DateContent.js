@@ -1,13 +1,12 @@
 import React, { useContext } from "react";
-import { format } from 'date-fns';
 import { Context, RenderContext } from "../../services/Context";
+import { getDateContent } from '../../services/todo'
 
-function DateContent () {
-    
-    const [job, index] = useContext(RenderContext)
+function DateContent() {
+    const [job] = useContext(RenderContext)
 
     return (
-        <span>{format(job.date, 'PP')}</span>
+        <span className="job__info-content date__content">{getDateContent(job.date)}</span>
     )
 }
 

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import CheckBox from '../CheckBox/index';
 import JobName from '../JobName/index';
 import JobDescription from '../JobDescription/index';

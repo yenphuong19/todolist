@@ -4,7 +4,7 @@ import { RenderContext } from "../../services/Context";
 function RepeatContent () {
     const [job, index] = useContext(RenderContext)
     return (
-        <span>{job.repeat}</span>
+        <span className="job__info-content repeat__content">{job.repeat}</span>
     )
 }
 

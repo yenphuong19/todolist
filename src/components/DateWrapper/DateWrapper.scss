@@ -1,17 +1,16 @@
 @import '../../assets/style/index.scss';
 
-.job__item.editor {
+.job__info-item.date {
 
-    .daypicker {
-        position: absolute;
-        top: 110%;
-        left: 0;
-        background-color: #fff;
-        border: 0.2px solid rgb(221, 220, 220);
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-        border-radius: $border-radius;
-        z-index: 1;
-        color: $text-color;
+    .date__icon {
+        background: url(../../assets/images/date.svg) no-repeat center;
+    }
+
+    .date__content {
+        color: #058527;
+    }
+
+    .date__selector {
     }
 
 }

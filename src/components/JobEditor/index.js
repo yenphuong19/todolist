@@ -13,7 +13,7 @@ function JobEditor () {
             <JobName />
             <JobDescription />
             <div className="d-flex justify-content-between info__wrapper" >
-                <div>
+                <div className='d-flex'>
                     <DateWrapper />
                     <TimeWrapper />
                     <RepeatWrapper />

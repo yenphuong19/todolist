@@ -1,5 +1,6 @@
 import React, { memo, useState, useContext } from 'react';
 import { Context, RenderContext } from '../../services/Context';
+import { MODE_NONE } from '../../services/mode';
 import { completedAction } from '../../services/reducer';
 
 function CheckBox () {
@@ -7,6 +8,7 @@ function CheckBox () {
     const [job, index] = useContext(RenderContext)
     const [checked, setChecked] = useState()
     const handleChecked = () => {
+        props.setMode(MODE_NONE)
         setChecked(job.name)
         setTimeout(() => props.dispatch(completedAction(job)), 300)
     }

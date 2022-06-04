@@ -1,14 +1,16 @@
 import React from 'react';
 import ButtonAdd from '../../components/Buttons/ButtonAdd';
 import ButtonFilter from '../../components/Buttons/ButtonFilter';
-import ButtonSearch from '../../components/Buttons/ButtonSearch';
+import SearchBox from '../../components/SearchBox';
+// import ButtonSearch from '../../components/Buttons/ButtonSearch';
 import './Header.scss';
 
 function Header () {
     return (
         <header>
             <div className="header__left">
-                <ButtonSearch />
+                {/* <ButtonSearch /> */}
+                <SearchBox />
             </div>
             <div className="header__right">
                 <ButtonAdd />

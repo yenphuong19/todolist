@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Poppins:wght@300;400;500;600&family=Roboto:wght@400;500;700;900&display=swap');
 
 $primary-color: #d75b39;
-$hover-color: #fed2c5;
+$hover-color: #f7f7f7;
 $text-color: #333;
 $border-color: #ddd;
 $line-color: rgb(230, 230, 230);
@@ -45,10 +45,69 @@ $border-radius: 4px;
 }
 
 // Global
+* {
+    box-sizing: border-box;
+}
+
 html, body {
     font-family: 'Lato', sans-serif;
     font-size: 62.5%;
+    
 }
+
+button {
+    padding: 0;
+    margin: 0;
+}
+
+.job__info-item {
+    position: relative;
+    
+    .job__info-button {
+        height: 28px;
+        background-color: #fff;
+        border: 1px solid $border-color;
+        border-radius: $border-radius;
+        padding: 0 6px;
+        margin-right: 10px;
+        display: inline-block;
+    }
+
+    .job__info-button:hover {
+        background-color: $hover-color;
+    }
+
+    .job__info-icon {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .job__info-content {
+        line-height: 28px;
+        margin-left: 22px;
+        font-size: 1.2rem;
+        font-weight: 300;
+    }
+
+    .job__info-selector {
+        position: absolute;
+        top: 110%;
+        left: 0;
+        background-color: #fff;
+        border: 0.2px solid rgb(221, 220, 220);
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        border-radius: $border-radius;
+        z-index: 2;
+        color: $text-color;
+        font-size: 1.3rem;
+        font-weight: 300;
+    }
+}
+
+
 
 // Icon Button
 .btn {
@@ -64,9 +123,7 @@ html, body {
     opacity: 1;
 }
 
-.column-3 {
-    width: 33.3%;
-}
+
 
 .btn-add {
     background: url(../images/add.svg) no-repeat center;
@@ -90,10 +147,6 @@ html, body {
 
 .btn-delete {
     background: url(../images/delete.svg) no-repeat center;
-}
-
-.btn-date {
-    background: url(../images/date.svg) no-repeat center;
 }
 
 .btn-time {

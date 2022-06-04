@@ -1,21 +1,11 @@
-import React, { useContext } from "react";
-import { Context } from '../../services/Context';
+import React from "react";
 
 function DateIcon () {
-    const [props] = useContext(Context)
-    const handleClick = () => {
-        props.setShowDayPicker(!props.showDayPicker);
-        // Khi click vào daypicker >> ẩn picker còn lại
-        props.setShowRepeat(false)
-        props.setShowTimePicker(false)
-    }
-
     return (
-        <button 
-            className="btn btn-date"
-            onClick={handleClick}
-        ></button>
-    )
+        <svg className="job__info-icon date__icon"></svg>
+        )    
+
+   
 }
 
 export default DateIcon;

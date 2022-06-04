@@ -6,7 +6,7 @@ import './JobList.scss';
 
 function JobList () {
     const [props] = useContext(Context)
-    console.log(props.state)
+    // console.log(props.state)
     return (
         <div className="job__list">
             {
