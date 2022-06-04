@@ -9,6 +9,7 @@ function Header () {
     return (
         <header>
             <div className="header__left">
+                <h1>1</h1>
                 {/* <ButtonSearch /> */}
                 <SearchBox />
             </div>
