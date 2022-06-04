@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/react-todo-app-new-ver/static/css/main.0cdb8d25.css",
-    "main.js": "/react-todo-app-new-ver/static/js/main.9075bd60.js",
+    "main.js": "/react-todo-app-new-ver/static/js/main.e521cdb9.js",
     "static/media/Lato-Regular.ttf": "/react-todo-app-new-ver/static/media/Lato-Regular.9d883d540ee2b4de8024.ttf",
     "static/media/no-job.svg": "/react-todo-app-new-ver/static/media/no-job.f1aa6ac7d1436fe4dd55.svg",
     "index.html": "/react-todo-app-new-ver/index.html",
@@ -20,10 +20,10 @@
     "static/media/x.svg": "/react-todo-app-new-ver/static/media/x.ca934201b65d5fbf461c.svg",
     "static/media/check.svg": "/react-todo-app-new-ver/static/media/check.a6151888542feae6b584.svg",
     "main.0cdb8d25.css.map": "/react-todo-app-new-ver/static/css/main.0cdb8d25.css.map",
-    "main.9075bd60.js.map": "/react-todo-app-new-ver/static/js/main.9075bd60.js.map"
+    "main.e521cdb9.js.map": "/react-todo-app-new-ver/static/js/main.e521cdb9.js.map"
   },
   "entrypoints": [
     "static/css/main.0cdb8d25.css",
-    "static/js/main.9075bd60.js"
+    "static/js/main.e521cdb9.js"
   ]
 }
