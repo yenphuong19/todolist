@@ -1,29 +1,24 @@
 {
   "files": {
-    "main.css": "/react-todo-app-new-ver/static/css/main.0cdb8d25.css",
-    "main.js": "/react-todo-app-new-ver/static/js/main.e521cdb9.js",
-    "static/media/Lato-Regular.ttf": "/react-todo-app-new-ver/static/media/Lato-Regular.9d883d540ee2b4de8024.ttf",
-    "static/media/no-job.svg": "/react-todo-app-new-ver/static/media/no-job.f1aa6ac7d1436fe4dd55.svg",
+    "main.css": "/react-todo-app-new-ver/static/css/main.3897658d.css",
+    "main.js": "/react-todo-app-new-ver/static/js/main.9ef9df59.js",
+    "static/media/no-task.svg": "/react-todo-app-new-ver/static/media/no-task.f1aa6ac7d1436fe4dd55c3f19b1bf36b.svg",
+    "static/media/logo.svg": "/react-todo-app-new-ver/static/media/logo.a93af1a8925e4db90753fc0710523c7d.svg",
     "index.html": "/react-todo-app-new-ver/index.html",
-    "static/media/filter.svg": "/react-todo-app-new-ver/static/media/filter.400aab96113b866a480a.svg",
-    "static/media/delete.svg": "/react-todo-app-new-ver/static/media/delete.60bdaa170a8fa02f5d0e.svg",
-    "static/media/date.svg": "/react-todo-app-new-ver/static/media/date.7817b4b4b4dff10a315f.svg",
-    "static/media/repeat.svg": "/react-todo-app-new-ver/static/media/repeat.c8f0abb6e55fb564af4e.svg",
-    "static/media/bell.svg": "/react-todo-app-new-ver/static/media/bell.3527b462f86ef2acc98f.svg",
-    "static/media/remider.svg": "/react-todo-app-new-ver/static/media/remider.3527b462f86ef2acc98f.svg",
-    "static/media/remider-active.svg": "/react-todo-app-new-ver/static/media/remider-active.a86bf4bff8373f67ec6b.svg",
-    "static/media/edit.svg": "/react-todo-app-new-ver/static/media/edit.c7be45862c88b368e8f9.svg",
-    "static/media/search.svg": "/react-todo-app-new-ver/static/media/search.3fb2c157cbbc7b055f67.svg",
-    "static/media/add.svg": "/react-todo-app-new-ver/static/media/add.d70cf11e775af76a7650.svg",
-    "static/media/time.svg": "/react-todo-app-new-ver/static/media/time.cfa0f781e2b8208c64f7.svg",
-    "static/media/add-active.svg": "/react-todo-app-new-ver/static/media/add-active.993375a51b0339987f0f.svg",
-    "static/media/x.svg": "/react-todo-app-new-ver/static/media/x.ca934201b65d5fbf461c.svg",
-    "static/media/check.svg": "/react-todo-app-new-ver/static/media/check.a6151888542feae6b584.svg",
-    "main.0cdb8d25.css.map": "/react-todo-app-new-ver/static/css/main.0cdb8d25.css.map",
-    "main.e521cdb9.js.map": "/react-todo-app-new-ver/static/js/main.e521cdb9.js.map"
+    "static/media/repeat.svg": "/react-todo-app-new-ver/static/media/repeat.a5aaafc7324141569da4e6f2e5673eec.svg",
+    "static/media/edit.svg": "/react-todo-app-new-ver/static/media/edit.75d078b547e1c0688445b9e47edfd1b9.svg",
+    "static/media/delete.svg": "/react-todo-app-new-ver/static/media/delete.43abd16f54731d4913dce221c9e37631.svg",
+    "static/media/search.svg": "/react-todo-app-new-ver/static/media/search.b1f781b99ceaafb9c831949bb54ae3cd.svg",
+    "static/media/calendar.svg": "/react-todo-app-new-ver/static/media/calendar.84471c0a90fae8ad0f380c56f657f4ba.svg",
+    "static/media/close.svg": "/react-todo-app-new-ver/static/media/close.ca934201b65d5fbf461c35e9d92db380.svg",
+    "static/media/add.svg": "/react-todo-app-new-ver/static/media/add.d6d4031c2cd8b8f2561ed3156c845c34.svg",
+    "static/media/check.svg": "/react-todo-app-new-ver/static/media/check.cdffb68ccdd1792b590ad746622c665b.svg",
+    "static/media/circle-fill.svg": "/react-todo-app-new-ver/static/media/circle-fill.27abb6fd37e94d6a2a778f5be08ef388.svg",
+    "main.3897658d.css.map": "/react-todo-app-new-ver/static/css/main.3897658d.css.map",
+    "main.9ef9df59.js.map": "/react-todo-app-new-ver/static/js/main.9ef9df59.js.map"
   },
   "entrypoints": [
-    "static/css/main.0cdb8d25.css",
-    "static/js/main.e521cdb9.js"
+    "static/css/main.3897658d.css",
+    "static/js/main.9ef9df59.js"
   ]
 }
