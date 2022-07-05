@@ -1,118 +1,35 @@
 import { getNewId  } from "./todo"
 
-// InitState
-const job = {
-    id: null,
-    name: '', 
-    description: '',
-    date: new Date(), 
-    repeat: 'None', 
-    edited: false
-}
-
-const jobs = [
-    {
-        id: 1,
-        name: 'Read book', 
-        description: 'Change life',
-        date: new Date(2022, 2, 2),
-        time: '',
-        repeat: 'None',
-        edited: false,
-    },
-    {
-        id: 2,
-        name: 'Clean houses', 
-        description: 'yeah yeah yeah',
-        date: new Date(2022, 0, 15),
-        time: '',
-        repeat: 'Weekly',
-        edited: false,
-    },
-    {
-        id: 3,
-        name: 'Shopping', 
-        description: '',
-        date: new Date(2022, 9, 10),
-        time: '',
-        repeat: 'Daily',
-        edited: false,
-    },
-    {
-        id: 4,
-        name: 'Go for a walk', 
-        description: 'In the park',
-        date: new Date(2022, 7, 4),
-        time: '',
-        repeat: 'Monthly',
-        edited: false,
-    },
-    {
-        id: 5,
-        name: 'Study hard, play hard', 
-        description: '',
-        date: new Date(2022, 6, 12),
-        time: '',
-        repeat: 'Daily',
-        edited: false,
-    },
-].concat(job)
-
-export const initState = {
-    job: job,
-    jobs: {
-        completed: [],
-        withoutUpdate: jobs,
-        all: jobs
-    },
-    showComponent: {
-        daypicker: false,
-        timepicker: false,
-        repeat: false,
-        jobAction: false,
-    }
-}
-
-
 // Action
-export const SET_NAME = 'set_name'
-export const setName = payload => {
+export const SET_INFO = 'set_info'
+export const setInfo = payload => {
     return {
-        type: SET_NAME, 
+        type: SET_INFO, 
         payload
     }
 }
 
-export const SET_DESCRIPTION = 'set_description'
-export const setDescription = payload => {
+export const ADD_TASK = 'add_task'
+export const addTask = payload => {
     return {
-        type: SET_DESCRIPTION, 
-        payload
-    }
-}
-
-export const ADD_JOB = 'add_job'
-export const addJob = payload => {
-    return {
-        type: ADD_JOB,
+        type: ADD_TASK,
         payload,
     }
 }
 
-export const EDIT_JOB = 'edit_job'
-export const editJob = (payload, index, status) => {
+export const EDIT_TASK = 'edit_task'
+export const editTask = (payload, status) => {
     return {
-        type: EDIT_JOB,
+        type: EDIT_TASK,
         payload,
-        index,
-        status,
+        status
     }
 }
 
-export const DELETE_JOB = 'delete_job'
-export const deleteJob = payload => {
+export const DELETE_TASK = 'delete_task'
+export const deleteTask = payload => {
     return {
-        type: DELETE_JOB,
+        type: DELETE_TASK,
         payload
     }
 }
@@ -132,39 +49,12 @@ export const completedAction = payload => {
         payload,
     }
 }
-export const CHANGE_NAME = 'change_name'
-export const changeName = (payload, index) => {
+
+export const CHANGE_INFO = 'change_info'
+export const changeInfo = payload => {
     return {
-        type: CHANGE_NAME,
-        payload,
-        index
-    }
-}
-
-export const CHANGE_DESCRIPTION = 'change_description'
-export const changeDescription = (payload, index) => {
-    return {
-        type: CHANGE_DESCRIPTION,
-        payload,
-        index
-    }
-}
-
-export const CHANGE_REPEAT = 'change_repeat'
-export const changeRepeat = (payload, repeat) => {
-    return { 
-        type: CHANGE_REPEAT, 
-        payload, 
-        repeat
-    }
-}
-
-export const CHANGE_DATE = 'change_date'
-export const changeDate = (payload, date) => {
-    return { 
-        type: CHANGE_DATE, 
-        payload, 
-        date
+        type: CHANGE_INFO,
+        payload
     }
 }
 
@@ -181,157 +71,93 @@ export const showComponent = (payload, status) => {
 // Reducer
 export default function reducer (state, action) {
 
-    const newJobsAll = [...state.jobs.all]
-    const newJobsCompleted = [...state.jobs.completed]
+    const newTasksAll = [...state.tasks.all]
+    const newTasksCompleted = [...state.tasks.completed]
 
     switch (action.type) {
 
-        case SET_NAME:
+        case SET_INFO:
             return {
                 ...state,
-                job: {
-                    ...state.job,
-                    name: action.payload, 
+                task: {
+                    ...state.task,
+                    [action.payload.name]: action.payload.value, 
                 }
             }
 
-        case SET_DESCRIPTION:
-            return {
-                ...state,
-                job: {
-                    ...state.job,
-                    description: action.payload, 
-                }
-            }
-
-        case ADD_JOB:
-            newJobsAll.splice(newJobsAll.length - 1, 0, {
-                ...state.job,
-                id: getNewId(newJobsAll),
-                edited:false
+        case ADD_TASK:
+            newTasksAll.splice(newTasksAll.length, 0, {
+                ...state.task,
+                id: getNewId(newTasksAll),
+                isEdit:false
             })
             return {
                ...state,
-                jobs: {
-                    ...state.jobs,
-                    all: newJobsAll
+                tasks: {
+                    ...state.tasks,
+                    all: newTasksAll,
+                    withoutUpdate: newTasksAll
                 }, 
             }
 
-        case EDIT_JOB:
-            let newJobsUpdateEdited = newJobsAll.map((job, index) => {
+        case EDIT_TASK:
+            let newTasksUpdateIsEdit = newTasksAll.map(task => {
                 return {
-                    ...job,
-                    edited: action.index === index ? action.status : false,
+                    ...task,
+                    isEdit: action.payload.id === task.id ? action.status : false,
                 }
             })
             return {
                 ...state,
-                jobs: {
-                    ...state.jobs,
-                    withoutUpdate: newJobsUpdateEdited,
-                    all: newJobsUpdateEdited
+                tasks: {
+                    ...state.tasks,
+                    withoutUpdate: newTasksUpdateIsEdit,
+                    all: newTasksUpdateIsEdit
                 },
             }
 
-        case DELETE_JOB:
-            newJobsAll.splice(action.payload, 1)
+        case DELETE_TASK:
+            newTasksAll.splice(action.payload, 1)
             return {
                 ...state,
-                jobs: {
-                    ...state.jobs,
-                    all: newJobsAll
+                tasks: {
+                    ...state.tasks,
+                    all: newTasksAll
                 }
             }
 
         case CANCEL_ACTION:
             return {
                 ...state,
-                jobs: {
-                    ...state.jobs,
-                    all: [...state.jobs.withoutUpdate]
+                tasks: {
+                    ...state.tasks,
+                    all: [...state.tasks.withoutUpdate]
                 }
             }
         
         case COMPLETED_ACTION:
-            newJobsCompleted.push(action.payload)
+            newTasksCompleted.push(action.payload)
             return {
                 ...state,
-                jobs: {
-                    ...state.jobs,
-                    completed: newJobsCompleted,
-                    all: [...state.jobs.all].filter(job => job.name !== action.payload.name),
+                tasks: {
+                    ...state.tasks,
+                    completed: newTasksCompleted,
+                    all: [...state.tasks.all].filter(task => task.name !== action.payload.name),
                 },
             }
 
-        case CHANGE_NAME: 
-            let newJobsUpdateName = newJobsAll.map((job, index) => {
+        case CHANGE_INFO:
+            let newTasksUpdateInfo = newTasksAll.map(task => {
                 return {
-                    ...job,
-                    name: action.index === index ? action.payload : job.name,
+                    ...task,
+                    [action.payload.name]: action.payload.task.id === task.id ? action.payload.value : task[action.payload.name]
                 }
             })
             return {
                 ...state,
-                jobs: {
-                    ...state.jobs,
-                    all: newJobsUpdateName
-                },
-            }
-
-        case CHANGE_DESCRIPTION: 
-            let newJobsUpdateDescription = newJobsAll.map((job, index) => {
-                return {
-                    ...job,
-                    description: action.index === index ? action.payload : job.description,
-                }
-            })
-            return {
-                ...state,
-                jobs: {
-                    ...state.jobs,
-                    all: newJobsUpdateDescription
-                },
-            }
-
-        case CHANGE_REPEAT:
-            let newJobsUpdateRepeat = newJobsAll.map(job => {
-                return {
-                    ...job,
-                    repeat: action.payload.id === job.id ? action.repeat : job.repeat,
-                }
-            })
-            return {
-                ...state,
-                jobs: {
-                    ...state.jobs,
-                    all: newJobsUpdateRepeat
-                }
-            }
-
-        case CHANGE_DATE:
-            let newJobsUpdateDate = newJobsAll.map(job => {
-                return {
-                   ...job,
-                    date: action.payload.id === job.id ? action.date : job.date,
-                }
-            })
-            return {
-                ...state,
-                jobs: {
-                    ...state.jobs,
-                    all: newJobsUpdateDate
-                }
-            }
-        
-        case SHOW_COMPONENT: 
-            let newShowComponent = {
-
-            }
-            return {
-                ...state,
-                showComponent: {
-                    ...state.showComponent
+                tasks: {
+                    ...state.tasks,
+                    all: newTasksUpdateInfo
                 }
             }
     }

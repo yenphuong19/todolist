@@ -1,24 +1,20 @@
 @import "../../../node_modules/bootstrap/scss/functions";
 @import "../../../node_modules/bootstrap/scss/_variables";
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Poppins:wght@300;400;500;600&family=Roboto:wght@400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;600;700;800&family=Poppins:wght@300;400;500;600&family=Roboto:wght@400;500;700;900&display=swap');
 
 $primary-color: #d75b39;
-$hover-color: #f7f7f7;
+$hover-color: #eee;
 $text-color: #333;
 $border-color: #ddd;
-$line-color: rgb(230, 230, 230);
+$line-color: #e6e6e6;
+$box-shadow-color: #c3c3c3;
 $date-color: #058527;
 $spacing: 12px;
-$border-radius: 4px;
-
-
-@function tint-color($color, $weight) {
-    @return mix(white, $color, $weight)
-};
-
-@function shade-color($color, $weight) {
-    @return mix(black, $color, $weight)
-};
+$border-radius: 6px;
+$button-icon-size: 24px;
+$font-size-primary: 1.5rem;
+$font-size-editor: 1.3rem;
+$font-size-secondary: 1.1rem;
 
 @keyframes fadeIn {
     from {
@@ -49,16 +45,62 @@ $border-radius: 4px;
     box-sizing: border-box;
 }
 
-html, body {
-    font-family: 'Lato', sans-serif;
+html {
     font-size: 62.5%;
-    
+    color: $text-color;
 }
 
-button {
-    padding: 0;
+body {
     margin: 0;
+    padding: 0;
+    font-size: 1.5rem;
+    font-family: 'Roboto', sans-serif;
+    overflow-x: hidden;
+    color: $text-color;
 }
+
+ul {
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+
+li {
+    list-style: none;
+}
+
+input {
+    background-color: transparent;
+    border-color: transparent;
+    padding: 0;
+
+    &:focus-visible {
+        outline: none;
+    }
+}
+
+// Button
+button {
+    border: none;
+    background-color: transparent;
+}
+// .btn__icon {
+//     border: none;
+//     border-radius: 4px;
+//     background-color: transparent;
+//     padding: 0 4px;
+//     margin-right: 4px;
+//     opacity: 0.7;
+// }
+.btn__icon:focus {
+    box-shadow: none;
+}
+.btn__icon:hover {
+    background-color: #f0f2f5;
+    opacity: 1;
+}
+
+
 
 .job__info-item {
     position: relative;
@@ -109,53 +151,8 @@ button {
 
 
 
-// Icon Button
-.btn {
-    opacity: 0.8;
-    width: 30px;
-    height: 30px;
-}
-.btn:focus {
-    box-shadow: none;
-}
-.btn:hover {
-    background-color: $hover-color;
-    opacity: 1;
-}
 
 
-
-.btn-add {
-    background: url(../images/add.svg) no-repeat center;
-}
-
-.btn-search {
-    background: url(../images/search.svg) no-repeat center;
-}
-
-.btn-filter {
-    background: url(../images/filter.svg) no-repeat center;
-}
-
-.btn-noti {
-    background: url(../images/bell.svg) no-repeat center;
-}
-
-.btn-edit {
-    background: url(../images/edit.svg) no-repeat center;
-}
-
-.btn-delete {
-    background: url(../images/delete.svg) no-repeat center;
-}
-
-.btn-time {
-    background: url(../images/time.svg) no-repeat center;
-}
-
-.btn-repeat {
-    background: url(../images/repeat.svg) no-repeat center;
-}
 
 
 

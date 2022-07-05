@@ -1,5 +1,5 @@
-import { FILTER_ALL, FILTER_ACTIVE, FILTER_COMPLETED } from './filter';
-import { MODE_NONE, MODE_CREATE, MODE_SEARCH, MODE_EDIT } from './mode';
+import { FILTER_ALL, FILTER_ACTIVE, FILTER_COMPLETED } from 'constants/filter';
+import { MODE_NONE, MODE_CREATE, MODE_SEARCH, MODE_EDIT } from 'constants/mode';
 import { format } from 'date-fns';
 
 export const getListRender = (list, mode, filter, query) => {
@@ -78,13 +78,32 @@ export const getDateContent = (date) => {
     const lastDayOfWeek = new Date()
     lastDayOfWeek.setDate(today.getDate() + 6)
     if (date.toLocaleDateString() === today.toLocaleDateString())
-        return 'Today'
+        return {
+            content: 'Today',
+            color: '#058527'
+        }
     else if (date.toLocaleDateString() === tomorrow.toLocaleDateString())
-        return 'Tomorrow'
+        return { 
+            content: 'Tomorrow',
+            color: '#ad6200'
+        }
     else if (date > tomorrow && date < lastDayOfWeek)
-        return format(date, 'iiii')
+        return { content: format(date, 'iiii') }
+            
     else if (date < today)
-        return 'Overdue'
+        return {
+            content: 'Overdue',
+            color: '#d1453b'
+        }
     else 
-        return format(date, 'dd MMM yyyy')
+        return { content: format(date, 'dd MMM yyyy') }
+}
+
+export const getTaskRender = (list) => {
+    const dateArray = list.map(item => item.date)
+    dateArray.map(item => {
+        <div>
+            <span>item</span>
+        </div>
+    })
 }
