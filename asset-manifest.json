@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/react-todo-app-new-ver/static/css/main.3897658d.css",
-    "main.js": "/react-todo-app-new-ver/static/js/main.9ef9df59.js",
+    "main.css": "/react-todo-app-new-ver/static/css/main.b98f1584.css",
+    "main.js": "/react-todo-app-new-ver/static/js/main.48951782.js",
     "static/media/no-task.svg": "/react-todo-app-new-ver/static/media/no-task.f1aa6ac7d1436fe4dd55c3f19b1bf36b.svg",
     "static/media/logo.svg": "/react-todo-app-new-ver/static/media/logo.a93af1a8925e4db90753fc0710523c7d.svg",
     "index.html": "/react-todo-app-new-ver/index.html",
@@ -14,11 +14,11 @@
     "static/media/add.svg": "/react-todo-app-new-ver/static/media/add.d6d4031c2cd8b8f2561ed3156c845c34.svg",
     "static/media/check.svg": "/react-todo-app-new-ver/static/media/check.cdffb68ccdd1792b590ad746622c665b.svg",
     "static/media/circle-fill.svg": "/react-todo-app-new-ver/static/media/circle-fill.27abb6fd37e94d6a2a778f5be08ef388.svg",
-    "main.3897658d.css.map": "/react-todo-app-new-ver/static/css/main.3897658d.css.map",
-    "main.9ef9df59.js.map": "/react-todo-app-new-ver/static/js/main.9ef9df59.js.map"
+    "main.b98f1584.css.map": "/react-todo-app-new-ver/static/css/main.b98f1584.css.map",
+    "main.48951782.js.map": "/react-todo-app-new-ver/static/js/main.48951782.js.map"
   },
   "entrypoints": [
-    "static/css/main.3897658d.css",
-    "static/js/main.9ef9df59.js"
+    "static/css/main.b98f1584.css",
+    "static/js/main.48951782.js"
   ]
 }
