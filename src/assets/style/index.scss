@@ -40,6 +40,15 @@ $font-size-secondary: 1.1rem;
     }
 }
 
+@keyframes appear {
+    from {
+       transform: scale(0, 0);
+    }
+    to {
+        transform: scale(1, 1);
+    }
+}
+
 // Global
 * {
     box-sizing: border-box;
@@ -79,6 +88,8 @@ input {
     }
 }
 
+
+
 // Button
 button {
     border: none;
@@ -99,65 +110,3 @@ button {
     background-color: #f0f2f5;
     opacity: 1;
 }
-
-
-
-.job__info-item {
-    position: relative;
-    
-    .job__info-button {
-        height: 28px;
-        background-color: #fff;
-        border: 1px solid $border-color;
-        border-radius: $border-radius;
-        padding: 0 6px;
-        margin-right: 10px;
-        display: inline-block;
-    }
-
-    .job__info-button:hover {
-        background-color: $hover-color;
-    }
-
-    .job__info-icon {
-        position: absolute;
-        width: 20px;
-        height: 20px;
-        top: 50%;
-        transform: translateY(-50%);
-    }
-
-    .job__info-content {
-        line-height: 28px;
-        margin-left: 22px;
-        font-size: 1.2rem;
-        font-weight: 300;
-    }
-
-    .job__info-selector {
-        position: absolute;
-        top: 110%;
-        left: 0;
-        background-color: #fff;
-        border: 0.2px solid rgb(221, 220, 220);
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-        border-radius: $border-radius;
-        z-index: 2;
-        color: $text-color;
-        font-size: 1.3rem;
-        font-weight: 300;
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-    

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-const UseOnClickOutSide = (ref, handler) => {
+const useOnClickOutSide = (ref, handler) => {
     useEffect(() => {
         const listener = e => {
             if (ref.current.contains(e.target) || ref.current.parentElement.contains(e.target)) {
@@ -17,4 +17,4 @@ const UseOnClickOutSide = (ref, handler) => {
     }, [ref, handler])
 }
 
-export default UseOnClickOutSide;
+export default useOnClickOutSide;

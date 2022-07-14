@@ -11,8 +11,12 @@ const StyledTaskView = styled.li`
     border-radius: 6px;
     padding: 6px 16px;
     margin: 12px 0;
-    box-shadow: 0 0 4px #c3c3c3;
+    box-shadow: 0 0 2px #c3c3c3;
     overflow: hidden;
+
+    &:hover {
+        box-shadow: 0 0 6px #c3c3c3;
+    }
 
     .info {
         display: flex;
@@ -68,7 +72,7 @@ function TaskView ({ task, index }) {
                             style={{paddingRight: '4px'}}
                         
                         ></i>
-                        {getDateContent(task.date).content}
+                        {getDateContent(task.date).value}
                     </span>
 
                     {/* Repeat */}

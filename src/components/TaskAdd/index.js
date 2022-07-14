@@ -1,12 +1,13 @@
-import React, { memo, useState, useContext } from 'react';
+import React, { memo, useState, useContext, useRef } from 'react';
 import { Context } from 'services/Context';
 import { MODE_CREATE } from 'constants/mode';
-import { editTask } from 'services/reducer';
+import { editTask, setInfo } from 'services/reducer';
 import TaskEditor from 'components/TaskEditor';
 import Buttons from '../Buttons';
 import styled from 'styled-components';
+import { getDateContent } from 'services/todo';
 
-const StyledTaskAdd = styled.button`
+const Wrapper = styled.button`
     padding: 0;
     border: none;
     background-color: transparent;
@@ -26,38 +27,43 @@ const StyledTaskAdd = styled.button`
         margin: 8px 0;
     }
 `;
-
-function TaskAdd ({ task }) {
+TaskAdd.defaultProps = {
+    task: [],
+    dateHeader: new Date()
+}
+function TaskAdd ({ task, dateHeader }) {
     const [props] = useContext (Context)
+    const buttonRef = useRef()
+    
+    
     const handleClickAdd = () => {
         // Change mode để không hiện task editor của task đã render
         props.setMode(MODE_CREATE)
-        props.setShowTaskEditor(true)
+        props.setShowTaskEditor(dateHeader)
+        props.dispatch(setInfo({name: 'date', value: dateHeader}))
     }
-    
-    switch (props.showTaskEditor) {
-        case true:
-            return (
-                <div>
-                    <div style={{border: '1px solid #ddd', borderRadius: '6px'}}>
-                        <TaskEditor task={task}/>
-                    </div>
-                    <Buttons task={task}/>
+
+    if (getDateContent(dateHeader).value === getDateContent(props.showTaskEditor).value && props.mode === MODE_CREATE) {
+        return (
+            <div>
+                <div style={{border: '1px solid #ddd', borderRadius: '6px'}}>
+                    <TaskEditor task={task} dateHeader={dateHeader}/>
                 </div>
-            )
+                <Buttons task={task} dateHeader={dateHeader}/>
+            </div>
+        )
 
-        default:
-            return (
-                <StyledTaskAdd 
-                    className="d-flex align-items-center"
-                    onClick={handleClickAdd}
-
-                >
-                    <i class="bi bi-plus-circle-fill" style={{fontSize: '1.7rem'}}></i>
-                    <span>Add new task</span>
-                </StyledTaskAdd>
-            )   
-    }
+        }
+    return (
+        <Wrapper 
+            className="d-flex align-items-center"
+            onClick={handleClickAdd}
+            ref={buttonRef}
+        >
+            <i class="bi bi-plus-circle-fill" style={{fontSize: '1.7rem'}}></i>
+            <span>Add new task</span>
+        </Wrapper>
+    )   
   
 }
 

@@ -1,7 +1,7 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Context } from "services/Context";
 import { changeInfo, setInfo } from "services/reducer";
-import UseOnClickOutSide from "services/hook/UseOnClickOutSide";
+import useOnClickOutSide from "services/hook/useOnClickOutSide";
 import styled from 'styled-components';
 import { MODE_EDIT } from "constants/mode";
 
@@ -92,7 +92,7 @@ function Selector ({ task, nameSelector, optionsSelector, iconClassName }) {
             button.current.removeEventListener('click', handleClickButton)
         }
     }, [])
-    UseOnClickOutSide(list, () => setShowDropdownList(false))
+    useOnClickOutSide(list, () => setShowDropdownList(false))
 
     return (
         <StyledSelector>

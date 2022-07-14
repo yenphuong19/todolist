@@ -1,23 +1,27 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { MENU } from 'constants/index';
+import { SIDEBAR } from 'constants/index';
+import { MODE_NONE } from 'constants/mode';
 import styled from 'styled-components';
 import { Context } from 'services/Context';
 
-const StyledSideBar = styled.ul`
-    padding: 80px 50px;
-        
+const Wrapper = styled.ul`
+    padding: 0 30px;
+
     li {
         display: flex;
         justify-content: space-between;
-        width: 100%;
-        height: 40px;
-        line-height: 40px;
+        height: 60px;
+        line-height: 60px;
         padding: 0 10px;
         border-radius: 6px;
         font-size: 1.5rem;
+        font-weight: 500;
+        background-color: #fff;
+        margin-bottom: 16px;
 
         a {
+            flex: 1;
             color: #333;
             text-decoration: none;
         }
@@ -30,29 +34,34 @@ const StyledSideBar = styled.ul`
     }
 
     @media (max-width: 740px) {
-        padding: 80px 0;
+        padding: 0;
+        margin-bottom: 20px;
+        display: flex;
+
+        li {
+            width: 30%;
+            margin: auto;
+        }
     }
     
 `
 function SideBar () {
     const [props] = useContext(Context)
     return (
-        <StyledSideBar className='col-3'>
+        <Wrapper className='col-md-3'>
             {
-                MENU.map( (item, index) => (
-                    <li key={index}>
+                SIDEBAR.map( (item, index) => (
+                    <li key={index} onClick={() => props.setMode(MODE_NONE)}>
                         <Link to={item.path}>
-                            <span style={{paddingRight: '8px'}}>{item.icon}</span>
+                            <span style={{paddingRight: '8px', fontSize: '1.8rem'}}>{item.icon}</span>
                             {item.title}
                         </Link>
-                        <span style={{color: '#999', fontSize: '1.2rem'}}>
+                        <span style={{color: `${item.quantityColor || '#333'}`, fontSize: '2.2rem', fontWeight: '500'}}>
                             {props.state.tasks.all.filter(task => {
                                 switch (item.title) {
                                     case 'Today':
-                                        return task.date === new Date();
-                                    case 'Overdue':
-                                        return task.date < new Date();
-                                    case 'Upcoming':
+                                        return task.date.toDateString() === new Date().toDateString();
+                                    case 'Scheduled':
                                         return task.date > new Date();
                                     default:
                                         return task.date
@@ -62,7 +71,7 @@ function SideBar () {
                     </li>
                 ))
             }
-        </StyledSideBar>
+        </Wrapper>
     )
 }
 

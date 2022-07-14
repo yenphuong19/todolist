@@ -1,7 +1,7 @@
-import React, { useState, useContext, useEffect, useRef } from 'react';
+import { useState, useContext, useEffect, useRef } from 'react';
 import { changeInfo, setInfo } from 'services/reducer';
 import { REPEAT_OPTIONS } from 'constants/repeat';
-import UseOnClickOutSide from 'services/hook/UseOnClickOutSide';
+import useOnClickOutSide from 'services/hook/useOnClickOutSide';
 import { Context } from 'services/Context';
 import styled from 'styled-components';
 import { MODE_EDIT } from 'constants/mode';
@@ -58,12 +58,15 @@ function RepeatSelector ({ task }) {
 
     const [showDropdownList, setShowDropdownList] = useState(false)
     const [showCheckMark, setShowCheckMark] = useState(task.repeat)
+    const [selectedRepeat, setSelectedRepeat] = useState(task.repeat)
+
 
     const button = useRef()
     const list = useRef()
 
     const handleClickRepeatButton = () => setShowDropdownList(prevState => !prevState)
     const handleClick = (repeat) => {
+        setSelectedRepeat(repeat.value)
         setShowCheckMark(repeat.value)
         setShowDropdownList(!showDropdownList)
         props.mode === MODE_EDIT ?
@@ -77,13 +80,13 @@ function RepeatSelector ({ task }) {
             button.current.removeEventListener('click', handleClickRepeatButton)
         }
     }, [])
-    UseOnClickOutSide(list, () => setShowDropdownList(false))
+    useOnClickOutSide(list, () => setShowDropdownList(false))
     
     return (
         <Wrapper>
             <button ref={button}>
                 <i style={{paddingRight: '6px'}}class="bi bi-arrow-repeat"></i>
-                <span>{task.repeat}</span>
+                <span>{selectedRepeat}</span>
             </button>
                 
             <ul ref={list} className={showDropdownList ? 'show' : ''}>
@@ -93,7 +96,7 @@ function RepeatSelector ({ task }) {
                         onClick={() => handleClick(repeat)}
                     >
                         {repeat.value}
-                        <i class="bi bi-circle-fill" style={{display: `${showCheckMark === repeat ? 'inline-block' : 'none'}`, fontSize: '1rem', color: '#777'}}></i>
+                        <i class="bi bi-circle-fill" style={{display: `${showCheckMark === repeat.value ? 'inline-block' : 'none'}`, fontSize: '1rem', color: '#777'}}></i>
                     </li>
 
                 )}

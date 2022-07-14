@@ -1,8 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useContext, useRef } from 'react';
 import { Context } from 'services/Context';
 import styled from 'styled-components';
 import TaskEditor from 'components/TaskEditor';
 import Buttons from 'components/Buttons';
+import useOnClickOutSide from 'services/hook/useOnClickOutSide';
 
 const StyledModal = styled.div`
     position: fixed;
@@ -12,6 +13,7 @@ const StyledModal = styled.div`
     right: 0;
     display: flex;
     z-index: 5;
+    
     
     .overlay {
         position: absolute;
@@ -24,11 +26,16 @@ const StyledModal = styled.div`
         box-shadow: 0 0 10px #c3c3c3;
         display: flex;
         flex-direction: column;
-        margin: 120px auto auto auto;
+        margin: auto;
         width: 580px;
         border-radius: 6px;
         background-color: #fff;
         z-index: 10;
+        animation: appear 0.08s linear;
+
+        @media (max-width: 740px) {
+            margin: auto 10px;
+        }
 
         .buttons {
             margin: 16px 16px 0;
@@ -38,11 +45,13 @@ const StyledModal = styled.div`
 
 function Modal () {
     const [props] = useContext(Context)
+    const modalRef = useRef()
+    useOnClickOutSide(modalRef, () => props.setShowModal(false))
     return (
         <StyledModal>
             <div className='overlay'></div>
-            <div className='body'>
-                <div>
+            <div className='body' >
+                <div ref={modalRef}>
                     <TaskEditor task={props.state.task}/>
                 </div>
                 <div className='buttons'>

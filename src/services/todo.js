@@ -77,33 +77,36 @@ export const getDateContent = (date) => {
     tomorrow.setDate(today.getDate() + 1)
     const lastDayOfWeek = new Date()
     lastDayOfWeek.setDate(today.getDate() + 6)
-    if (date.toLocaleDateString() === today.toLocaleDateString())
+    if (date.toDateString() === today.toDateString())
         return {
-            content: 'Today',
+            value: 'Today',
             color: '#058527'
         }
-    else if (date.toLocaleDateString() === tomorrow.toLocaleDateString())
+    else if (date.toDateString() === tomorrow.toDateString())
         return { 
-            content: 'Tomorrow',
+            value: 'Tomorrow',
             color: '#ad6200'
         }
     else if (date > tomorrow && date < lastDayOfWeek)
-        return { content: format(date, 'iiii') }
+        return { value: format(date, 'iiii') }
             
     else if (date < today)
         return {
-            content: 'Overdue',
+            value: 'Overdue',
             color: '#d1453b'
         }
+    else if (!date) {
+        return { value : '' }
+    }
     else 
-        return { content: format(date, 'dd MMM yyyy') }
+        return { value: format(date, 'MMM dd, yyyy') }
 }
 
-export const getTaskRender = (list) => {
-    const dateArray = list.map(item => item.date)
-    dateArray.map(item => {
-        <div>
-            <span>item</span>
-        </div>
+export const uniqueArray = (array) => {
+    let arrayToString = array.map(item => item.toLocaleDateString())
+    let newArray = []
+    newArray = array.filter((item, index) => {
+        return arrayToString[index] === arrayToString[index - 1] ? '' : newArray.push(item)
     })
+    return newArray
 }

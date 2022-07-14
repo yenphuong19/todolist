@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Context } from 'services/Context';
-import { editTask, deleteTask, completedAction } from 'services/reducer';
+import { editTask, deleteTask, completedAction, changeInfo } from 'services/reducer';
 import { MODE_EDIT } from 'constants/mode';
 import styled from 'styled-components';
 
@@ -19,14 +19,20 @@ const StyledTaskActions = styled.div`
         i {
             color: #fff;
         }
+
+        &:hover {
+            opacity: 0.7;
+        }
     }
 `;
 
 function TaskActions ({ task, index }) {
-
     const [props] = useContext(Context)
 
-    const handleClickDone = () => props.dispatch(completedAction(task))
+    const handleClickDone = () => {
+        props.dispatch(completedAction(task))
+    
+    }
     const handleClickEdit = () => {
         props.setMode(MODE_EDIT);
         props.dispatch(editTask(task, true));
@@ -35,7 +41,6 @@ function TaskActions ({ task, index }) {
 
     return (
         <StyledTaskActions showJobActions={props.showJobActions === task.id}>
-
             {/* Done task */}
             <button 
                 className="d-flex align-items-center "
@@ -47,7 +52,6 @@ function TaskActions ({ task, index }) {
 
             {/* Edit task */}
             <button 
-                className="btn__icon"
                 onClick={handleClickEdit}
                 style={{backgroundColor: '#B1B1B1', marginLeft: '8px'}}
             >
@@ -56,7 +60,6 @@ function TaskActions ({ task, index }) {
 
             {/* Delete task */}
             <button 
-                className="btn__icon"
                 onClick={handleClickDelete}
                 style={{backgroundColor: '#FF0000', marginLeft: '8px'}}
             >

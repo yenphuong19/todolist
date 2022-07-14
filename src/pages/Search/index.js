@@ -6,22 +6,23 @@ import TaskItem from "components/TaskItem";
 
 function Search () {
     const [props] = useContext(Context)
+    const tasksResult = 
+        props.state.tasks.all
+            .filter(task => {
+            return task.name
+                .toString()
+                .toLowerCase()
+                .indexOf(props.query.toLowerCase()) > -1
+        })
+       
     return (
-        <div className="col-9 vh-100" style={{padding: '80px'}}>
-            <h2 >
-                Result for "{props.query}"
-            </h2>
+        <div>
+            <h2>Result for "{props.query}"</h2>
             {props.showModal && <Modal />}
             {
-                props.query !== ''
+                tasksResult.length
                 ?
-                props.state.tasks.all
-                    .filter(task => {
-                        return task.name
-                            .toString()
-                            .toLowerCase()
-                            .indexOf(props.query.toLowerCase()) > -1
-                    })
+                tasksResult
                     .map((task, index) => 
                         <TaskItem
                             task={task}
@@ -30,7 +31,7 @@ function Search () {
                         />
                     )
                 : 
-                <Fragment></Fragment>
+                <Fragment>No result</Fragment>
             }
         </div>
     )

@@ -1,62 +1,42 @@
-import React, { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Context } from 'services/Context';
-import { getListRender } from 'services/todo';
-import TaskItem from '../TaskItem/index';
-import styled from 'styled-components';
+import { getDateContent, getListRender } from 'services/todo';
 import { format } from 'date-fns';
+import TaskItem from 'components/TaskItem';
+import TaskAdd from 'components/TaskAdd';
+import styled from 'styled-components';
 
-const StyledTaskList = styled.div`
-
-`;
-
-function TaskList ({ list, dateToCompare }) {
+function TaskList ({ tasks, dateHeader, isOverdue }) {
     const [props] = useContext(Context)
-    // return (
-    //     <div className="task__list">
-
-    //         {/* Overdue Task */}
-    //         <div style={{fontWeight: '600', marginTop: '24px'}}>Overdue</div>
-    //         {
-    //             getListRender(props.state.tasks, props.mode, props.filter, props.query)
-    //                 .filter(task => {
-    //                     return (task.date < new Date()) && (task.date.toLocaleDateString() != new Date().toLocaleDateString())
-    //                 })
-    //                 .map((task, index) => 
-    //                     <TaskItem 
-    //                         task={task}
-    //                         index={index}    
-    //                         key={index}                    
-    //                     />
-    //                 )
-    //         }
-
-    //         {/* Today Task */}
-    //         <div style={{fontWeight: '600', marginTop: '24px'}}>
-    //             Today
-    //             <i class="bi bi-dot"></i>
-    //             {format(new Date, 'MMM dd')}
-    //         </div>
-    //         {
-    //             getListRender(props.state.tasks, props.mode, props.filter, props.query)
-    //                 .filter(task => {
-    //                     return task.date.toLocaleDateString() === new Date().toLocaleDateString()
-    //                 })
-    //                 .map((task, index) => 
-    //                     <TaskItem 
-    //                         task={task}
-    //                         index={index}    
-    //                         key={index}                    
-    //                     />
-    //                 )
-    //         }
-    //     </div>
-    // )
-   return (
+  
+    return (
        <div>
-           
+            <div className='header' style={{fontWeight: '600', margin: '20px 0 10px 0'}}>
+                {isOverdue ? 'Overdue' : <> 
+                    {getDateContent(dateHeader).value}
+                </>}
+            </div>
+            {
+                tasks
+                .filter(task => {
+                    if (isOverdue) {
+                        return (task.date < new Date()) && getDateContent(task.date).value !== getDateContent(dateHeader).value
+                    }
+                    return getDateContent(task.date).value === getDateContent(dateHeader).value
+                })
+                .map((task, index) => 
+                    <TaskItem task={task} index={index} key={index}/>
+                )
+            }
+            {isOverdue ? '' : <TaskAdd task={props.state.task} dateHeader={dateHeader}/>}
        </div>
    )
-
 }
 
 export default TaskList;
+
+TaskList.defaultProps = {
+    task: [],
+    dateHeader: Date(),
+    isOverdue: undefined
+}

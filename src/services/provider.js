@@ -11,7 +11,7 @@ function Provider ({children}) {
     const [mode, setMode] = useState(MODE_NONE)
     const [filter, setFilter] = useState(FILTER_ACTIVE)
     const [query, setQuery] = useState('')
-    const [showTaskEditor, setShowTaskEditor] = useState()
+    const [showTaskEditor, setShowTaskEditor] = useState(new Date())
     const [showJobActions, setShowJobActions] = useState()
     const [showModal, setShowModal] = useState()
     

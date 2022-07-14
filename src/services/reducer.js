@@ -35,9 +35,17 @@ export const deleteTask = payload => {
 }
 
 export const CANCEL_ACTION = 'cancel_action'
-export const cancelAction = (payload) => {
+export const cancelAction = payload => {
     return {
         type: CANCEL_ACTION,
+        payload
+    }
+}
+
+export const SAVE_ACTION = 'save_action'
+export const saveAction = payload => {
+    return {
+        type: SAVE_ACTION,
         payload
     }
 }
@@ -96,7 +104,8 @@ export default function reducer (state, action) {
                 tasks: {
                     ...state.tasks,
                     all: newTasksAll,
-                    withoutUpdate: newTasksAll
+                    withoutUpdate: newTasksAll,
+                    update: newTasksAll
                 }, 
             }
 
@@ -134,9 +143,25 @@ export default function reducer (state, action) {
                     all: [...state.tasks.withoutUpdate]
                 }
             }
+
+        case SAVE_ACTION:
+            return {
+                ...state,
+                tasks: {
+                    ...state.tasks,
+                    all: [...state.tasks.update]
+                }
+            }
         
         case COMPLETED_ACTION:
-            newTasksCompleted.push(action.payload)
+            const date = new Date()
+            // const time = `${date.getHours()}:${date.getMinutes()}`
+            const newTaskCompleted = {
+                ...action.payload,
+                dateCompleted: date
+            }
+                
+            newTasksCompleted.push(newTaskCompleted)
             return {
                 ...state,
                 tasks: {
@@ -157,7 +182,7 @@ export default function reducer (state, action) {
                 ...state,
                 tasks: {
                     ...state.tasks,
-                    all: newTasksUpdateInfo
+                    update: newTasksUpdateInfo
                 }
             }
     }

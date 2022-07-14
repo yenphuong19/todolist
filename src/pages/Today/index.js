@@ -4,7 +4,7 @@ import { MODE_CREATE } from 'constants/mode';
 import { Images } from 'constants/index';
 import { format } from 'date-fns';
 import styled from 'styled-components';
-import TaskList from 'components/TaskList/index';
+import TaskList from 'components/TaskList';
 import TaskAdd from 'components/TaskAdd';
 import Modal from 'components/Modal';
 
@@ -17,7 +17,7 @@ const NoTask = styled.div`
     }
 `; 
 
-function Home() {
+function Today() {
     const [props] = useContext(Context)
 
     switch (props.state.tasks.all.length) {
@@ -32,20 +32,24 @@ function Home() {
             )
         default:
             return (
-                <div
-                    className="col-9 d-flex flex-column vh-100"
-                    style={{padding: '80px', maxWidth: '800px'}}
-                >
-                    <h2 className='task__header'>
-                        <span className='pe-2'>Today</span>
-                        <small style={{fontSize: '1.2rem', color: '#999'}}>{format(new Date, 'MMM dd')}</small>
-                    </h2>
-                    <TaskList />
-                    <TaskAdd task={props.state.task}/>
+                <div>
+                    {/* Header */}
+                    <h1 style={{color: 'blue'}}>
+                        <span >Today</span>
+                        <small style={{fontSize: '1.2rem', paddingLeft: '6px'}}>{format(new Date, 'MMM dd')}</small>
+                    </h1>
+
+                    {/* Overdue Task */}
+                    <TaskList tasks={props.state.tasks.all} dateHeader={new Date()} isOverdue/>
+
+                    {/* Today Task */}
+                    <TaskList tasks={props.state.tasks.all} dateHeader={new Date()}/>
+
+                    {/* Modal */}
                     {props.showModal && <Modal />}
                 </div>
             )
     } 
 }
 
-export default Home;
+export default Today;

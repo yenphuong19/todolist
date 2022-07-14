@@ -1,73 +1,91 @@
-import React, { memo, useState, useContext, useRef, useCallback } from 'react';
+import { memo, useState, useContext, useRef, useCallback } from 'react';
 import { MODE_NONE, MODE_SEARCH } from 'constants/mode'
 import { Context } from 'services/Context';
-import { Images } from 'constants/index';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
-const StyledSearchBox = styled.div`
+const Wrapper = styled.div`
     position: relative;
-    border: 1px solid transparent;
     padding: 4px 10px;
     width: 250px;
+    border: 1px solid transparent;
     border-radius: 6px;
+    background-color: #121212;
 
     &:focus-within {
-        border: 1px solid $primary-color;
+        border: 1px solid #d75b39;
     }
+`;
 
-    input {
-        font-size: 1.3rem;
-        border-color: transparent;
-        box-shadow: none;
-        padding-left: 10px;
+const Input = styled.input`
+    font-size: 1.3rem;
+    border-color: transparent;
+    box-shadow: none;
+    padding-left: 10px;
+    caret-color: #fff;
+    color: #fff;
 
-        &:focus-visible {
-            outline: none;
-        }
+    &:focus-visible {
+        outline: none;
     }
+`
 
-    button > img {
-        position: absolute;
-        right: 4px;
-        top: 50%;
-        transform: translateY(-50%);
-    }
+const Button = styled.button`
+    color: #fff;
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
 `;
 
 function SearchBox() {
     const [props] = useContext(Context)
-    const [show, setShow] = useState(false)
+
+    const [searchValue, setSearchValue] = useState('')
+
     const inputRef = useRef()
-    const handleChange = e => {
-        props.setMode(MODE_SEARCH)
-        props.setQuery(e.target.value)
-        e.target.value.length > 0 ? setShow(true) : setShow(false)
+    const linkRef = useRef()
+
+    const handleChangeSearchValue = e => {
+        // console.log('handleChangeSearchValue')
+        props.setMode(MODE_SEARCH); 
+        setSearchValue(e.target.value)
     }
-    const handleDeleteValue = useCallback(() => {
-        props.setQuery('');
-        setShow(false)
+    const handleShowSearchResult = e => {
+        // console.log('handleShowSearchResult')
+        if (searchValue.trim() && e.keyCode == 13) { 
+            props.setQuery(searchValue.trim());
+            linkRef.current.click();
+            setSearchValue('');
+        };
+    }
+    const handleDeleteValue = () => {
+        // console.log('handleDeleteValue')
+        setSearchValue('');
         inputRef.current.focus()
-    },[show])
+    }
 
     return (
-        <StyledSearchBox className="search_box d-flex align-items-center bg-light">
-            <img src={Images.SEARCH_ICON} alt="search-icon"></img>
-            <input 
+        <Wrapper className="search_box d-flex align-items-center">
+            {/* {console.log('render')} */}
+            <i className="bi bi-search" style={{color: '#fff', fontSize: '1.6rem'}}></i>
+            <Input 
                 ref={inputRef}
                 type="text"
                 placeholder="Search"
-                value={props.query}
-                onChange={handleChange}
+                value={props.mode === MODE_NONE ? '' : searchValue}
+                onChange={handleChangeSearchValue}
+                onKeyDown={handleShowSearchResult}
             />
             {
-                show 
+                !!searchValue 
                 &&
-                <button onClick={handleDeleteValue}>
-                    <img src={Images.CLOSE_ICON} alt="close-icon"></img>
-                </button>
+                <Button>
+                    <i className="bi bi-x-lg" onClick={handleDeleteValue}></i>
+                </Button>
             }
-            
-        </StyledSearchBox>
+            <Link to='/search' ref={linkRef}></Link>
+        </Wrapper>
     )
 }
 

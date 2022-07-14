@@ -1,22 +1,19 @@
-export const MENU = [
+export const SIDEBAR = [
     {
-        title: 'All task',
-        path: '/',
+        title: 'All',
+        path: '/all',
         icon: <i class="bi bi-house-door"></i>
-    },
-    {
-        title: 'Overdue',
-        path: '/',
-        icon: <i class="bi bi-calendar-x"></i>
     },
     {
         title: 'Today',
         path: '/',
+        quantityColor: 'blue',
         icon: <i class="bi bi-calendar-date"></i>
     },
     {
-        title: 'Upcoming',
-        path: '/search',
+        title: 'Scheduled',
+        path: '/scheduled',
+        quantityColor: '#d1453b',
         icon: <i class="bi bi-calendar2-week"></i>
     }
 ]

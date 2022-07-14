@@ -4,4 +4,4 @@ export { Images } from './image';
 export { LABEL_OPTIONS } from './label';
 export { REPEAT_OPTIONS } from './repeat';
 export { PRIORITY_OPTIONS } from './priority';
-export { MENU } from './menu';
+export { SIDEBAR } from './sidebar';

@@ -1,9 +1,8 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { Context } from 'services/Context';
 import { MODE_NONE } from 'constants/mode';
 import { cancelAction, editTask } from 'services/reducer';
 import styled from 'styled-components';
-import initState from 'services/initState';
 
 const Button = styled.button`
     background-color: #ddd;
@@ -24,10 +23,9 @@ function ButtonSecondary ({ task }) {
     const [props] = useContext(Context)
 
     const handleClick = () => {
-        // props.setMode(MODE_NONE);
+        props.setMode(MODE_NONE);
         props.dispatch(cancelAction());
         props.dispatch(editTask(task, false));
-        props.setShowTaskEditor(false);
         props.setShowModal(false)
     }
 

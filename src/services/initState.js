@@ -1,4 +1,3 @@
-// InitState
 const task = {
     id: null,
     name: '', 
@@ -8,6 +7,8 @@ const task = {
     priority: 'None',
     label: 'None',
     isEdit: false,
+    dateCompleted: ''
+
 }
 
 const tasks = [
@@ -21,6 +22,7 @@ const tasks = [
         priority: 'High',
         label: 'Personal',
         isEdit: false,
+        dateCompleted: ''
     },
     {
         id: 2,
@@ -32,28 +34,31 @@ const tasks = [
         priority: 'None',
         label: 'Personal',
         isEdit: false,
+        dateCompleted: ''
     },
     {
         id: 3,
         name: 'Shopping', 
         description: '',
-        date: new Date(2022, 9, 10),
+        date: new Date(2022, 8, 10),
         time: '',
         repeat: 'Daily',
         priority: 'Normal',
         label: 'None',
         isEdit: false,
+        dateCompleted: ''
     },
     {
         id: 4,
         name: 'Go for a walk', 
         description: 'In the park',
-        date: new Date(2022, 7, 4),
+        date: new Date(2022, 7, 8),
         time: '',
         repeat: 'Monthly',
         priority: 'Normal',
         label: 'None',
         isEdit: false,
+        dateCompleted: ''
     },
     {
         id: 5,
@@ -65,6 +70,43 @@ const tasks = [
         priority: 'High',
         label: 'Study',
         isEdit: false,
+        dateCompleted: ''
+    },
+    {
+        id: 6,
+        name: 'Writing', 
+        description: '',
+        date: new Date(),
+        time: '',
+        repeat: 'Daily',
+        priority: 'High',
+        label: 'Personal',
+        isEdit: false,
+        dateCompleted: ''
+    },
+    {
+        id: 7,
+        name: 'Cooking', 
+        description: '',
+        date: new Date(),
+        time: '',
+        repeat: 'None',
+        priority: 'None',
+        label: 'None',
+        isEdit: false,
+        dateCompleted: ''
+    },
+    {
+        id: 8,
+        name: 'Dot dot dot', 
+        description: '',
+        date: new Date(2022, 8, 10),
+        time: '',
+        repeat: 'None',
+        priority: 'None',
+        label: 'None',
+        isEdit: false,
+        dateCompleted: ''
     },
 ]
 
@@ -73,6 +115,7 @@ const initState = {
     tasks: {
         completed: [],
         withoutUpdate: tasks,
+        update: tasks,
         all: tasks
     },
     showComponent: {

@@ -3,7 +3,7 @@ import { Context } from 'services/Context';
 import { getDateContent } from 'services/todo';
 import { changeInfo, setInfo } from 'services/reducer';
 import { DayPicker } from 'react-day-picker';
-import UseOnClickOutSide from 'services/hook/UseOnClickOutSide';
+import useOnClickOutSide from 'services/hook/useOnClickOutSide';
 import 'react-day-picker/dist/style.css';
 import styled from 'styled-components';
 import { MODE_EDIT } from 'constants/mode';
@@ -50,11 +50,12 @@ const StyledDateSelector = styled.div`
     }
 `;
 
-function DateSelector ({ task }) {
+function DateSelector ({ task, dateHeader }) {
 
     const [props] = useContext(Context)
 
     const [showDayPicker, setShowDayPicker] = useState(false)
+    const [selectedDate, setSelectedDate] = useState(dateHeader)
 
     const button = useRef()
     const dateSelector = useRef()
@@ -62,6 +63,7 @@ function DateSelector ({ task }) {
     const handleClickDateButton = () => setShowDayPicker(prevState => !prevState)
     const handleDayClick = e => {
         setShowDayPicker(!showDayPicker)
+        setSelectedDate(e)
         props.mode === MODE_EDIT ? 
         props.dispatch(changeInfo({ name: 'date', task, value: e || task.date })) :
         props.dispatch(setInfo({ name: 'date', value: e }))
@@ -73,14 +75,14 @@ function DateSelector ({ task }) {
             button.current.removeEventListener('click', handleClickDateButton)
         }
     },[])
-    UseOnClickOutSide(dateSelector, () => setShowDayPicker(false))
+    useOnClickOutSide(dateSelector, () => setShowDayPicker(false))
     
     return (
         <StyledDateSelector>
 
-            <button ref={button} style={{backgroundColor: '#F0F2F5'}}>
+            <button ref={button} style={{backgroundColor: '#F0F2F5', color: `${getDateContent(dateHeader || task.date).color}`}}>
                 <i class="bi bi-calendar"></i>
-                {getDateContent(task.date).content}
+                {getDateContent(selectedDate || task.date).value}
             </button>
 
             <div className={`selector ${showDayPicker ? 'show' : ''}`} ref={dateSelector}>
@@ -89,7 +91,7 @@ function DateSelector ({ task }) {
                     fromDate={new Date()}
                     mode='single'
                     showOutsideDays
-                    selected={task.date}
+                    selected={selectedDate || task.date}
                     onDayClick={(e) => handleDayClick(e)}
                 />
             </div>

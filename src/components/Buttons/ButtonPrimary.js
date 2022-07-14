@@ -1,9 +1,8 @@
-import React, { useState, useContext, useEffect } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { Context } from 'services/Context';
-import { addTask, editTask, setInfo } from 'services/reducer';
+import { addTask, editTask, saveAction, setInfo } from 'services/reducer';
 import { MODE_CREATE, MODE_NONE } from 'constants/mode';
 import styled from 'styled-components';
-import initState from 'services/initState';
 
 const Button = styled.button`
     color: #fff;
@@ -26,23 +25,31 @@ const Button = styled.button`
 function ButtonPrimary ({ task }) {
     
     const [props] = useContext(Context)
+
+    console.log(task)
+
     const [disabledButton, setDisabledButton] = useState(false)
+
     const handleClickAddButton = () => {
         props.dispatch(addTask(task));
         props.dispatch(setInfo({name: 'name', value: ''}));
         props.dispatch(setInfo({name: 'description', value: ''}));
+        props.dispatch(setInfo({name: 'repeat', value: 'None'}));
+        props.dispatch(setInfo({name: 'priority', value: 'None'}));
+        props.dispatch(setInfo({name: 'label', value: 'None'}));
         props.setMode(MODE_NONE)
         props.setShowModal(false)
-        props.setShowTaskEditor(false)
     }
     const handleClickSaveButton = () => {
         props.dispatch(editTask(task, false));
-        props.setShowTaskEditor(false)
+        props.dispatch(saveAction())
+        props.setMode(MODE_NONE)
     }
+
     useEffect(() => {
         task.name === '' ? setDisabledButton(true) : setDisabledButton(false)
     }, [task.name])
-    
+
     return (
         <Button 
             disabled={disabledButton}
