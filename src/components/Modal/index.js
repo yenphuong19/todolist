@@ -5,7 +5,7 @@ import TaskEditor from 'components/TaskEditor';
 import Buttons from 'components/Buttons';
 import useOnClickOutSide from 'services/hook/useOnClickOutSide';
 
-const StyledModal = styled.div`
+const Wrapper = styled.div`
     position: fixed;
     top: 0;
     bottom: 0;
@@ -48,9 +48,9 @@ function Modal () {
     const modalRef = useRef()
     useOnClickOutSide(modalRef, () => props.setShowModal(false))
     return (
-        <StyledModal>
+        <Wrapper>
             <div className='overlay'></div>
-            <div className='body' >
+            <div className='body'>
                 <div ref={modalRef}>
                     <TaskEditor task={props.state.task}/>
                 </div>
@@ -58,7 +58,7 @@ function Modal () {
                     <Buttons task={props.state.task}/>
                 </div>
             </div>
-        </StyledModal>
+        </Wrapper>
     )
 }
 

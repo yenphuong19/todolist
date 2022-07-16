@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { SIDEBAR } from 'constants/index';
 import { MODE_NONE } from 'constants/mode';
 import styled from 'styled-components';
 import { Context } from 'services/Context';
+import routes from 'services/routes';
 
 const Wrapper = styled.ul`
     padding: 0 30px;
@@ -47,10 +47,31 @@ const Wrapper = styled.ul`
 `
 function SideBar () {
     const [props] = useContext(Context)
+
+    const SIDEBAR_LIST = [
+        {
+            title: 'All',
+            path: routes.all,
+            icon: <i class="bi bi-house-door"></i>
+        },
+        {
+            title: 'Today',
+            path: routes.home,
+            quantityColor: 'blue',
+            icon: <i class="bi bi-calendar-date"></i>
+        },
+        {
+            title: 'Scheduled',
+            path: routes.scheduled,
+            quantityColor: '#d1453b',
+            icon: <i class="bi bi-calendar2-week"></i>
+        }
+    ]
+    
     return (
         <Wrapper className='col-md-3'>
             {
-                SIDEBAR.map( (item, index) => (
+                SIDEBAR_LIST.map( (item, index) => (
                     <li key={index} onClick={() => props.setMode(MODE_NONE)}>
                         <Link to={item.path}>
                             <span style={{paddingRight: '8px', fontSize: '1.8rem'}}>{item.icon}</span>

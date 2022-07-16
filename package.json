@@ -1,7 +1,7 @@
 {
   "name": "todo-app",
   "version": "0.1.0",
-  "homepage": "https://yenphuong19.github.io/react-todo-app-new-ver/",
+  "homepage": "https://yenphuong19.github.io/todolist/",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.2",

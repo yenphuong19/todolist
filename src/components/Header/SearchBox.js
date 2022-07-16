@@ -1,10 +1,11 @@
-import { memo, useState, useContext, useRef, useCallback } from 'react';
+import { memo, useState, useContext, useRef } from 'react';
 import { MODE_NONE, MODE_SEARCH } from 'constants/mode'
 import { Context } from 'services/Context';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import routes from 'services/routes';
 
-const Wrapper = styled.div`
+const Wrapper = styled.form`
     position: relative;
     padding: 4px 10px;
     width: 250px;
@@ -51,22 +52,26 @@ function SearchBox() {
         props.setMode(MODE_SEARCH); 
         setSearchValue(e.target.value)
     }
-    const handleShowSearchResult = e => {
-        // console.log('handleShowSearchResult')
-        if (searchValue.trim() && e.keyCode == 13) { 
+    const handleSubmitSearch = e => {
+        e.preventDefault()
+        // console.log('handleSubmitSearch')
+        if (searchValue.trim()) { 
             props.setQuery(searchValue.trim());
             linkRef.current.click();
             setSearchValue('');
         };
     }
-    const handleDeleteValue = () => {
-        // console.log('handleDeleteValue')
+    const handleDeleteSearchValue = () => {
+        // console.log('handleDeleteSearchValue')
         setSearchValue('');
         inputRef.current.focus()
     }
 
     return (
-        <Wrapper className="search_box d-flex align-items-center">
+        <Wrapper 
+            className="d-flex align-items-center"
+            onSubmit={handleSubmitSearch}
+        >
             {/* {console.log('render')} */}
             <i className="bi bi-search" style={{color: '#fff', fontSize: '1.6rem'}}></i>
             <Input 
@@ -75,16 +80,15 @@ function SearchBox() {
                 placeholder="Search"
                 value={props.mode === MODE_NONE ? '' : searchValue}
                 onChange={handleChangeSearchValue}
-                onKeyDown={handleShowSearchResult}
             />
             {
                 !!searchValue 
                 &&
                 <Button>
-                    <i className="bi bi-x-lg" onClick={handleDeleteValue}></i>
+                    <i className="bi bi-x-lg" onClick={handleDeleteSearchValue}></i>
                 </Button>
             }
-            <Link to='/search' ref={linkRef}></Link>
+            <Link to={routes.search} ref={linkRef}></Link>
         </Wrapper>
     )
 }

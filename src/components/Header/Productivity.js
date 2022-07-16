@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import routes from 'services/routes';
 import styled from 'styled-components';
 
 const StyledProductivity = styled.div`
@@ -77,7 +78,7 @@ function Productivity () {
                 </span>
                 Daily goal: 3/5 tasks
             </div>
-            <Link to='/productivity/completed'>View all completed tasks</Link>
+            <Link to={routes.completed}>View all completed tasks</Link>
         </StyledProductivity>
     )
 }

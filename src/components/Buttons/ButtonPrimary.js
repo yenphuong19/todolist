@@ -26,8 +26,6 @@ function ButtonPrimary ({ task }) {
     
     const [props] = useContext(Context)
 
-    console.log(task)
-
     const [disabledButton, setDisabledButton] = useState(false)
 
     const handleClickAddButton = () => {

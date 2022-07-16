@@ -9,11 +9,11 @@ const Wrapper = styled.div`
     text-align: right;
 `;
 
-function Buttons ({ task, date }) {
+function Buttons ({ task }) {
     return (
         <Wrapper>
-            <ButtonSecondary task={task} date={date}/>  
-            <ButtonPrimary task={task} date={date}/>  
+            <ButtonSecondary task={task}/>  
+            <ButtonPrimary task={task}/>  
         </Wrapper>
     )
 }

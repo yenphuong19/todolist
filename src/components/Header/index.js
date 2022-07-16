@@ -1,10 +1,10 @@
 import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 import { Images, MODE_CREATE } from 'constants/index';
 import { Context } from 'services/Context';
-
-import styled from 'styled-components';
+import routes from 'services/routes';
 
 import SearchBox from './SearchBox';
 import Productivity from './Productivity';
@@ -70,7 +70,7 @@ function Header () {
     return (
         <Wrapper>
             <div className="d-flex">
-                <Link to='/'>
+                <Link to={routes.home}>
                     <img src={Images.LOGO} alt="Logo" className='pe-4'></img>
                 </Link>
                 <SearchBox />
