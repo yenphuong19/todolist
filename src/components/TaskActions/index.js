@@ -1,20 +1,23 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect, useRef } from 'react';
 import { Context } from 'services/Context';
 import { editTask, deleteTask, completedAction, changeInfo } from 'services/reducer';
 import { MODE_EDIT } from 'constants/mode';
 import styled from 'styled-components';
+import Toast from 'components/Toast';
+import { Actions } from 'constants/action';
 
-const StyledTaskActions = styled.div`
+const Wrapper = styled.div`
     position: absolute;
     right: 0;
-    display: flex;
     margin-right: 16px;
     display: ${props => props.showJobActions ? 'flex' : 'none'};
+    animation: fadeIn 0.15s ease-in-out;
 
     button {
         width: 28px;
         height: 28px;
         border-radius: 50%;
+        text-align: center;
 
         i {
             color: #fff;
@@ -26,28 +29,62 @@ const StyledTaskActions = styled.div`
     }
 `;
 
-function TaskActions ({ task, index }) {
+function TaskActions ({ task }) {
     const [props] = useContext(Context)
 
-    const handleClickDone = () => {
-        props.dispatch(completedAction(task))
-    
-    }
+    const doneButtonRef =  useRef()
+    const deleteButtonRef =  useRef()
+
+    useEffect(() => {
+        const handleClickDone = () => {
+            console.log('click done')
+            props.setShowToast({isShow: true, action: Actions.completed})
+            props.dispatch(completedAction(task))
+            const handle = setTimeout(() => {
+                props.setShowToast({isShow: false});
+            }, 2000)
+
+            return () => {
+                clearTimeout(handle)
+            }
+        }
+        const handleClickDelete = () => {
+            console.log('click delete')
+            props.setShowToast({isShow: true, action: Actions.delete})
+            props.dispatch(deleteTask(task))
+            const handle = setTimeout(() => {
+                props.setShowToast({isShow: false});
+            }, 2000)
+
+            return () => {
+                clearTimeout(handle)
+            }
+        }
+
+        doneButtonRef.current.addEventListener('click', handleClickDone)
+        deleteButtonRef.current.addEventListener('click', handleClickDelete)
+
+        return () => {
+            doneButtonRef.current.removeEventListener('click', handleClickDone)
+            deleteButtonRef.current.removeEventListener('click', handleClickDelete)
+        }
+
+    }, [task])
+
     const handleClickEdit = () => {
         props.setMode(MODE_EDIT);
         props.dispatch(editTask(task, true));
     }
-    const handleClickDelete = () => props.dispatch(deleteTask(index))
 
     return (
-        <StyledTaskActions showJobActions={props.showJobActions === task.id}>
+        <Wrapper showJobActions={props.showJobActions === task.id}>
             {/* Done task */}
             <button 
                 className="d-flex align-items-center "
-                onClick={handleClickDone}
+                ref={doneButtonRef}
                 style={{backgroundColor: '#32C200'}}
             >
-                <i class="bi bi-check-lg" style={{fontSize: '2rem', transform: 'translateX(-2px)'}}></i>
+                <i className="bi bi-check-lg"></i>
             </button>
 
             {/* Edit task */}
@@ -55,18 +92,17 @@ function TaskActions ({ task, index }) {
                 onClick={handleClickEdit}
                 style={{backgroundColor: '#B1B1B1', marginLeft: '8px'}}
             >
-                <i class="bi bi-pencil-fill"></i>
+                <i className="bi bi-pencil-fill"></i>
             </button>
 
             {/* Delete task */}
             <button 
-                onClick={handleClickDelete}
+                ref={deleteButtonRef}
                 style={{backgroundColor: '#FF0000', marginLeft: '8px'}}
             >
-                <i class="bi bi-trash-fill"></i>
+                <i className="bi bi-trash-fill"></i>
             </button>
-
-        </StyledTaskActions>
+        </Wrapper>
     )
 }
 

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { Fragment, useContext } from 'react';
 import { Context } from 'services/Context';
 import { MODE_CREATE } from 'constants/mode';
 import { Images } from 'constants/index';
@@ -7,49 +7,65 @@ import styled from 'styled-components';
 import TaskList from 'components/TaskList';
 import TaskAdd from 'components/TaskAdd';
 import Modal from 'components/Modal';
+import { getDateContent, getListRender } from 'services/todo';
+
+const Header = styled.h1`
+    color: blue;
+    margin-bottom: 24px;
+
+    small {
+        font-size: 1.2rem;
+        padding-left: 6px
+    }
+`;
 
 const NoTask = styled.div`
-    margin-top: 70px;
-    
-    img {
-        width: 300px;
-        height: 260px;
+    margin: 20px;
+    width: 240px;
+    margin: auto;
+    color: #777;
+
+    p {
+        text-align: center
     }
 `; 
 
 function Today() {
     const [props] = useContext(Context)
 
-    switch (props.state.tasks.all.length) {
-        case false:
-            props.setMode(MODE_CREATE)
-            return (
-                <NoTask className="col-9">
-                    <img src={Images.NOTASK_BACKGROUND} />
-                    <p>Enjoy your day off</p>
-                    {props.showModal && <Modal />}
-                </NoTask>
-            )
-        default:
-            return (
-                <div>
-                    {/* Header */}
-                    <h1 style={{color: 'blue'}}>
-                        <span >Today</span>
-                        <small style={{fontSize: '1.2rem', paddingLeft: '6px'}}>{format(new Date, 'MMM dd')}</small>
-                    </h1>
+    const overdueList = getListRender(props.state.tasks.all, 'overdue')
 
-                    {/* Overdue Task */}
-                    <TaskList tasks={props.state.tasks.all} dateHeader={new Date()} isOverdue/>
+    const todayList = getListRender(props.state.tasks.all, 'today')
 
-                    {/* Today Task */}
-                    <TaskList tasks={props.state.tasks.all} dateHeader={new Date()}/>
+    const NoTaskBackground = (
+        <div>
+            <TaskAdd task={props.state.task}/>
+            <NoTask>
+                <img src={Images.NOTASK_BACKGROUND} />
+                <p>Enjoy your day off</p>
+            </NoTask>
+        </div>
+    )
 
-                    {/* Modal */}
-                    {props.showModal && <Modal />}
-                </div>
-            )
-    } 
+    const HaveTask = (
+        <Fragment>
+            {!!overdueList.length && <TaskList tasks={overdueList} isOverdue/>}
+    
+            {!!todayList.length && <TaskList tasks={todayList} sectionHeader={new Date()}/>}
+    
+            {!todayList.length && !overdueList.length && <TaskAdd task={props.state.task}/>}
+        </Fragment>
+    )
+   
+    return (
+        <Fragment>
+            <Header>
+                <span>Today</span>
+                <small>{format(new Date, 'MMM dd')}</small>
+            </Header>
+            {!!todayList.length ? HaveTask  :  NoTaskBackground}
+        </Fragment>
+    )
 }
 
 export default Today;

@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from 'react';
 import { Context } from 'services/Context';
 import { addTask, editTask, saveAction, setInfo } from 'services/reducer';
-import { MODE_CREATE, MODE_NONE } from 'constants/mode';
+import { MODE_CREATE, MODE_CREATE_WITH_MODAL } from 'constants/mode';
 import styled from 'styled-components';
 
 const Button = styled.button`
@@ -22,38 +22,16 @@ const Button = styled.button`
     }
 `;
 
-function ButtonPrimary ({ task }) {
+function ButtonPrimary ({ task, onSubmit }) {
     
     const [props] = useContext(Context)
 
-    const [disabledButton, setDisabledButton] = useState(false)
-
-    const handleClickAddButton = () => {
-        props.dispatch(addTask(task));
-        props.dispatch(setInfo({name: 'name', value: ''}));
-        props.dispatch(setInfo({name: 'description', value: ''}));
-        props.dispatch(setInfo({name: 'repeat', value: 'None'}));
-        props.dispatch(setInfo({name: 'priority', value: 'None'}));
-        props.dispatch(setInfo({name: 'label', value: 'None'}));
-        props.setMode(MODE_NONE)
-        props.setShowModal(false)
-    }
-    const handleClickSaveButton = () => {
-        props.dispatch(editTask(task, false));
-        props.dispatch(saveAction())
-        props.setMode(MODE_NONE)
-    }
-
-    useEffect(() => {
-        task.name === '' ? setDisabledButton(true) : setDisabledButton(false)
-    }, [task.name])
-
     return (
         <Button 
-            disabled={disabledButton}
-            onClick={props.mode === MODE_CREATE ? handleClickAddButton : handleClickSaveButton}
+            disabled={!task.name.trim()}
+            onClick={onSubmit}
         >
-            {props.mode === MODE_CREATE ? 'Add' : 'Save'}
+            {props.mode === MODE_CREATE || props.mode === MODE_CREATE_WITH_MODAL ? 'Add' : 'Save'}
         </Button>
     )
 }

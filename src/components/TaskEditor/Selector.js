@@ -5,54 +5,56 @@ import useOnClickOutSide from "services/hook/useOnClickOutSide";
 import styled from 'styled-components';
 import { MODE_EDIT } from "constants/mode";
 
-const StyledSelector = styled.div`
+const Wrapper = styled.div`
     display: flex;
     position: relative;
+`;
 
-    button {
-        border-radius: 6px;
-        margin-left: 6px;
-        font-size: 1.5rem;
+const Button = styled.div`
+    border-radius: 6px;
+    margin-left: 6px;
+    padding: 0 6px;
+    font-size: 1.5rem;
+    align-items: center;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #eee;
+    }
+`;
+
+const ListSelector = styled.ul`
+    position: absolute;
+    left: 0;
+    top: 110%;
+    width: 200px;
+    background-color: #fff;
+    box-shadow: 0 0 6px #c3c3c3;
+    border-radius: 6px;
+    z-index: 2;
+    font-size: 1.3rem;
+    overflow: hidden;
+    padding-left: 0;
+    margin-bottom: 0;
+
+    li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 6px 10px;
+        cursor: pointer;
 
         &:hover {
             background-color: #eee;
         }
     }
 
-    ul {
-        position: absolute;
-        left: 0;
-        top: 110%;
-        width: 200px;
-        background-color: #fff;
-        box-shadow: 0 0 6px #c3c3c3;
-        border-radius: 6px;
-        z-index: 2;
-        font-size: 1.3rem;
-        overflow: hidden;
-        padding-left: 0;
-        margin-bottom: 0;
-
-        li {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 6px 10px;
-            cursor: pointer;
-
-            &:hover {
-                background-color: #eee;
-            }
-        }
-    }
-
     @media (max-width: 740px) {
-        ul {
-            left: -170px;
-            top: 110%;
-        }
+        left: -170px;
+        top: 110%;
     }
 `;
+
 function Selector ({ task, nameSelector, optionsSelector, iconClassName }) {
 
     const [props] = useContext(Context)
@@ -72,8 +74,11 @@ function Selector ({ task, nameSelector, optionsSelector, iconClassName }) {
     const [showCheckMark, setShowCheckMark] = useState(task[nameSelector])
     const [icon, setIcon] = useState(<i className={`${iconClassName}${iconColor ? '-fill' : ''}`} style={{color: `${iconColor ? iconColor : ''}`}}></i>)
     
+    console.log('render', showDropdownList)
 
-    const handleClickButton = () => {
+    const handleClickButton = (e) => {
+        console.log('click')
+        e.preventDefault();
         setShowDropdownList(prevState => !prevState)
     }
     const handleChangeInfo = (params) => {
@@ -87,17 +92,18 @@ function Selector ({ task, nameSelector, optionsSelector, iconClassName }) {
     }
     
     useEffect(() => {
+        console.log('useEffect')
         button.current.addEventListener('click', handleClickButton)
         return () => {
             button.current.removeEventListener('click', handleClickButton)
         }
     }, [])
-    useOnClickOutSide(list, () => setShowDropdownList(false))
+    useOnClickOutSide(list, () => {console.log('outside');setShowDropdownList(false)})
 
     return (
-        <StyledSelector>
-            <button ref={button} className='btn__icon'>{icon}</button>
-            <ul ref={list} style={{display: `${showDropdownList ? 'block' : 'none'}`}}>
+        <Wrapper>
+            <Button ref={button}>{icon}</Button>
+            <ListSelector ref={list} style={{display: `${showDropdownList ? 'block' : 'none'}`}}>
                 {
                     optionsSelector.map(option => (
                         <li 
@@ -108,12 +114,12 @@ function Selector ({ task, nameSelector, optionsSelector, iconClassName }) {
                                 {iconElement(option.color)}
                                 <span style={{marginLeft: '10px'}}>{option.value}</span>
                             </span>
-                            <i class="bi bi-circle-fill" style={{display: `${showCheckMark === option.value ? 'inline-block' : 'none'}`, fontSize: '1rem', color: '#777'}}></i>
+                            <i className="bi bi-circle-fill" style={{display: `${showCheckMark === option.value ? 'inline-block' : 'none'}`, fontSize: '1rem', color: '#777'}}></i>
                         </li>
                     ))
                 }
-            </ul>
-        </StyledSelector>
+            </ListSelector>
+        </Wrapper>
     )
 }
 

@@ -1,91 +1,96 @@
 import React, { memo, useState, useContext, useEffect, useRef } from 'react';
 import { Context } from 'services/Context';
 import { getDateContent } from 'services/todo';
-import { changeInfo, setInfo } from 'services/reducer';
+import { changeDate, setInfo } from 'services/reducer';
 import { DayPicker } from 'react-day-picker';
 import useOnClickOutSide from 'services/hook/useOnClickOutSide';
 import 'react-day-picker/dist/style.css';
 import styled from 'styled-components';
 import { MODE_EDIT } from 'constants/mode';
 
-const StyledDateSelector = styled.div`
+const Wrapper = styled.div`
     position: relative;
     padding-right: 10px;
 
-    button {
-        border-radius: 8px;
-        padding: 4px 10px;
-        font-size: 1.3rem;
-
-        &:hover {
-            opacity: 0.7;
-        }
-
-        i {
-            padding-right: 6px;
-        }
-    }
-
     .selector {
-        position: absolute;
-        left: 0;
-        top: 110%;
-        z-index: 2;
-        background-color: #fff;
-        box-shadow: 0 0 6px #c3c3c3;
-        border-radius: 6px;
-        font-size: 1.3rem;
-        display: none;
-
-        &.show {
-            display: block;
-        }
-
-        button {
-
-            &:hover {
-                background-color: #F0F2F5;
-            }
-        }
+        
     }
 `;
 
-function DateSelector ({ task, dateHeader }) {
+const Button = styled.div`
+    border-radius: 8px;
+    padding: 4px 10px;
+    font-size: 1.3rem;
+    background-color: #F0F2F5;
+    cursor: pointer;
 
-    const [props] = useContext(Context)
-
-    const [showDayPicker, setShowDayPicker] = useState(false)
-    const [selectedDate, setSelectedDate] = useState(dateHeader)
-
-    const button = useRef()
-    const dateSelector = useRef()
-
-    const handleClickDateButton = () => setShowDayPicker(prevState => !prevState)
-    const handleDayClick = e => {
-        setShowDayPicker(!showDayPicker)
-        setSelectedDate(e)
-        props.mode === MODE_EDIT ? 
-        props.dispatch(changeInfo({ name: 'date', task, value: e || task.date })) :
-        props.dispatch(setInfo({ name: 'date', value: e }))
+    &:hover {
+        opacity: 0.7;
     }
 
+    i {
+        padding-right: 6px;
+    }
+`;
+
+const Selector = styled.div`
+    position: absolute;
+    left: 0;
+    top: 110%;
+    z-index: 2;
+    background-color: #fff;
+    box-shadow: 0 0 6px #c3c3c3;
+    border-radius: 6px;
+    font-size: 1.3rem;
+    // display: none;
+
+    // .show {
+    //     display: block;
+    // }
+
+    button:hover {
+        background-color: #F0F2F5;
+    }
+`;
+
+function DateSelector ({ task, dateDefault }) {
+
+    const [props] = useContext(Context)
+    
+    const [showDaySelector, setShowDaySelector] = useState(false)
+    const [selectedDate, setSelectedDate] = useState(dateDefault)
+    
+    const dateButton = useRef()
+    const dateSelector = useRef()
+
+    const handleClickDateButton = () => {
+        setShowDaySelector(prevState => !prevState)
+    }
+    const handleDayClick = e => {
+        setShowDaySelector(!showDaySelector)
+        setSelectedDate(e)
+        props.mode === MODE_EDIT ? 
+        props.dispatch(changeDate({ task, value: e || task.date })) :
+        props.dispatch(setInfo({ name: 'date', value: e }))
+    }
+    console.log(selectedDate)
+
     useEffect(() => {
-        button.current.addEventListener('click', handleClickDateButton)
+        dateButton.current.addEventListener('click', handleClickDateButton)
         return () => {
-            button.current.removeEventListener('click', handleClickDateButton)
+            dateButton.current.removeEventListener('click', handleClickDateButton)
         }
     },[])
-    useOnClickOutSide(dateSelector, () => setShowDayPicker(false))
+    useOnClickOutSide(dateSelector, () => setShowDaySelector(false))
     
     return (
-        <StyledDateSelector>
-
-            <button ref={button} style={{backgroundColor: '#F0F2F5', color: `${getDateContent(dateHeader || task.date).color}`}}>
-                <i class="bi bi-calendar"></i>
+        <Wrapper>
+            <Button ref={dateButton} style={{ color: `${getDateContent(selectedDate || task.date).color || '#333'}`}}>
+                <i className="bi bi-calendar"></i>
                 {getDateContent(selectedDate || task.date).value}
-            </button>
+            </Button>
 
-            <div className={`selector ${showDayPicker ? 'show' : ''}`} ref={dateSelector}>
+            <Selector style={{display: `${showDaySelector ? 'block' : 'none'}`}} ref={dateSelector}>
                 <DayPicker 
                     defaultMonth={new Date()}
                     fromDate={new Date()}
@@ -94,9 +99,8 @@ function DateSelector ({ task, dateHeader }) {
                     selected={selectedDate || task.date}
                     onDayClick={(e) => handleDayClick(e)}
                 />
-            </div>
-
-        </StyledDateSelector>
+            </Selector>
+        </Wrapper>
     )
 }
 

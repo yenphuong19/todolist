@@ -9,11 +9,11 @@ const Wrapper = styled.div`
     text-align: right;
 `;
 
-function Buttons ({ task }) {
+function Buttons ({ task, onSubmit}) {
     return (
-        <Wrapper>
+        <Wrapper className='buttons'>
             <ButtonSecondary task={task}/>  
-            <ButtonPrimary task={task}/>  
+            <ButtonPrimary task={task} onSubmit={onSubmit}/>  
         </Wrapper>
     )
 }

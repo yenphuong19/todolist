@@ -2,65 +2,85 @@ import { FILTER_ALL, FILTER_ACTIVE, FILTER_COMPLETED } from 'constants/filter';
 import { MODE_NONE, MODE_CREATE, MODE_SEARCH, MODE_EDIT } from 'constants/mode';
 import { format } from 'date-fns';
 
-export const getListRender = (list, mode, filter, query) => {
-    const filterParam = 'completed'
-    const searchParam = 'name'
+// export const getListRender = (list, mode, filter, query) => {
+//     const filterParam = 'completed'
+//     const searchParam = 'name'
 
-    switch (mode) {
-        case MODE_NONE:
-        case MODE_CREATE:
-        case MODE_EDIT:
-            return list.all
-            // switch (filter) {
-            //     case FILTER_ALL:
-            //         return list
-            //     case FILTER_ACTIVE:
-            //         return list.filter(item => {
-            //             return item[filterParam] === false
-            //         })
-            //     case FILTER_COMPLETED:
-            //         return list.filter(item => {
-            //             return item[filterParam] === true
-            //         })
-            // }
-        case MODE_SEARCH:
-            return list.all.filter(item => {
-                return item[searchParam]
-                    .toString()
-                    .toLowerCase()
-                    .indexOf(query.toLowerCase()) > -1
+//     switch (mode) {
+//         case MODE_NONE:
+//         case MODE_CREATE:
+//         case MODE_EDIT:
+//             return list.all
+//             // switch (filter) {
+//             //     case FILTER_ALL:
+//             //         return list
+//             //     case FILTER_ACTIVE:
+//             //         return list.filter(item => {
+//             //             return item[filterParam] === false
+//             //         })
+//             //     case FILTER_COMPLETED:
+//             //         return list.filter(item => {
+//             //             return item[filterParam] === true
+//             //         })
+//             // }
+//         case MODE_SEARCH:
+//             return list.all.filter(item => {
+//                 return item[searchParam]
+//                     .toString()
+//                     .toLowerCase()
+//                     .indexOf(query.toLowerCase()) > -1
+//                 })
+//             // switch (filter) {
+//             //     case FILTER_ALL:
+//             //         return list.filter(item => {
+//             //             return item[searchParam]
+//             //                 .toString()
+//             //                 .toLowerCase()
+//             //                 .indexOf(query.toLowerCase()) > -1
+//             //             })
+//             //     case FILTER_ACTIVE:
+//             //         const filterActiveResult = list.filter(item => {
+//             //             return item[filterParam] === false
+//             //         })
+//             //         const searchActiveResult = filterActiveResult.filter(item => {
+//             //             return item[searchParam]
+//             //                 .toString()
+//             //                 .toLowerCase()
+//             //                 .indexOf(query.toLowerCase()) > -1
+//             //         })
+//             //         return searchActiveResult
+//             //     case FILTER_COMPLETED:
+//             //         const filterCompletedResult = list.filter(item => {
+//             //             return item[filterParam] === true
+//             //         })
+//             //         const searchCompletedResult = filterCompletedResult.filter(item => {
+//             //             return item[searchParam]
+//             //                 .toString()
+//             //                 .toLowerCase()
+//             //                 .indexOf(query.toLowerCase()) > -1
+//             //         })
+//             //         return searchCompletedResult
+//             // }
+//     }
+// }
+
+export const getListRender = (list, dateContent, dateCompare) => {
+    switch (dateContent) {
+        case 'overdue':
+            return list
+                .filter(item => {
+                    return (item.date < new Date()) && getDateContent(item.date).value !== getDateContent(new Date()).value
                 })
-            // switch (filter) {
-            //     case FILTER_ALL:
-            //         return list.filter(item => {
-            //             return item[searchParam]
-            //                 .toString()
-            //                 .toLowerCase()
-            //                 .indexOf(query.toLowerCase()) > -1
-            //             })
-            //     case FILTER_ACTIVE:
-            //         const filterActiveResult = list.filter(item => {
-            //             return item[filterParam] === false
-            //         })
-            //         const searchActiveResult = filterActiveResult.filter(item => {
-            //             return item[searchParam]
-            //                 .toString()
-            //                 .toLowerCase()
-            //                 .indexOf(query.toLowerCase()) > -1
-            //         })
-            //         return searchActiveResult
-            //     case FILTER_COMPLETED:
-            //         const filterCompletedResult = list.filter(item => {
-            //             return item[filterParam] === true
-            //         })
-            //         const searchCompletedResult = filterCompletedResult.filter(item => {
-            //             return item[searchParam]
-            //                 .toString()
-            //                 .toLowerCase()
-            //                 .indexOf(query.toLowerCase()) > -1
-            //         })
-            //         return searchCompletedResult
-            // }
+        case 'today':
+            return list
+                .filter(item => {
+                    return getDateContent(item.date).value === getDateContent(new Date()).value
+                })
+        case 'upcoming':
+            return list 
+                .filter(item =>{
+                    return getDateContent(item.date).value === getDateContent(dateCompare).value
+                })
     }
 }
 
@@ -88,7 +108,10 @@ export const getDateContent = (date) => {
             color: '#ad6200'
         }
     else if (date > tomorrow && date < lastDayOfWeek)
-        return { value: format(date, 'iiii') }
+        return { 
+            value: format(date, 'iiii'),
+            color: '#692FC2' 
+        }
             
     else if (date < today)
         return {

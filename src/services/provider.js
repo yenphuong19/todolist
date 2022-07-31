@@ -14,6 +14,7 @@ function Provider ({children}) {
     const [showTaskEditor, setShowTaskEditor] = useState(new Date())
     const [showJobActions, setShowJobActions] = useState()
     const [showModal, setShowModal] = useState()
+    const [showToast, setShowToast] = useState({isShow: false})
     
     const props = {
         state,
@@ -29,7 +30,9 @@ function Provider ({children}) {
         showJobActions,
         setShowJobActions,
         showModal,
-        setShowModal
+        setShowModal,
+        showToast,
+        setShowToast
     }
 
     return (

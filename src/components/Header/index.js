@@ -2,12 +2,14 @@ import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { Images, MODE_CREATE } from 'constants/index';
+import { Images } from 'constants/index';
+import { MODE_CREATE_WITH_MODAL } from 'constants/mode';
 import { Context } from 'services/Context';
 import routes from 'services/routes';
 
 import SearchBox from './SearchBox';
 import Productivity from './Productivity';
+import { getDateContent } from 'services/todo';
 
 const Wrapper = styled.header`
     display: flex;
@@ -32,7 +34,7 @@ const Button = styled.button`
     margin-left: 10px;
     color: #fff;
     padding: 0 6px;
-    font-size: 1.8rem;
+    font-size: 2.2rem;
 
     &:hover {
         opacity: 0.7;
@@ -45,27 +47,31 @@ const ProductivityQuantity = styled.span`
     padding-left: 6px;
 `;
 
-const Avartar = styled.div`
-    border-radius: 50%;
-    border: 1px solid #d75b39;
-    height: 30px;
-    width: 30px;
-    line-height: 33.5px;
-    display: block;
-    text-align: center;
-    margin-left: 20px;
-    font-size: 1.5rem;
-`;
-
 function Header () {
     const [props] = useContext(Context)
+
+    const todayCompletedTask = 
+        props.state.tasks.completed
+        .filter(item => {return getDateContent(item.date).value === getDateContent(new Date()).value})
+        .length
+    const totalTodayTask = 
+        props.state.tasks.all
+        .filter(item => {return getDateContent(item.date).value === getDateContent(new Date()).value})
+        .length
+        + todayCompletedTask
+    const productivityPercent = todayCompletedTask / totalTodayTask * 100
+    const countTodayCompletedTask = `${todayCompletedTask}/${totalTodayTask}`
+    const totalCompletedTask = props.state.tasks.completed.length
+    const totalTask = props.state.tasks.all.length + props.state.tasks.completed.length
 
     const [showProductivity, setShowProductivity] = useState(false)
 
     const handleClickAddButton = () => {
         props.setShowModal(true)
-        props.setMode(MODE_CREATE)
+        props.setMode(MODE_CREATE_WITH_MODAL)
     }
+
+    console.log(totalTodayTask)
 
     return (
         <Wrapper>
@@ -75,18 +81,29 @@ function Header () {
                 </Link>
                 <SearchBox />
             </div>
+
             <div className="d-flex justify-content-end">
                 <Button onClick={handleClickAddButton}>
-                    <i className="bi bi-plus-lg"></i>
+                    <i className="bi bi-plus-circle-fill"></i>
                 </Button>
+
                 <div className='position-relative'>
                     <Button onClick={() => setShowProductivity(!showProductivity)}>
-                        <i class="bi bi-graph-up-arrow"></i>
-                        <ProductivityQuantity>3/5</ProductivityQuantity>
+                        <i className="bi bi-arrow-up-right-circle-fill"></i>
+                        <ProductivityQuantity>{`${totalCompletedTask}/${totalTask}`}</ProductivityQuantity>
                     </Button>
-                    {showProductivity && <Productivity />}
+                    
+                    {
+                        showProductivity && 
+                        <Productivity 
+                            countTodayCompletedTask={countTodayCompletedTask}
+                            countTotalCompletedTask={totalCompletedTask} 
+                            countAllTask={totalTask} 
+                            percent={productivityPercent} 
+                            setShowProductivity={setShowProductivity}
+                        />
+                    }
                 </div>
-                <Avartar></Avartar>
             </div>
         </Wrapper>
     )

@@ -66,6 +66,14 @@ export const changeInfo = payload => {
     }
 }
 
+export const CHANGE_DATE = 'change_date'
+export const changeDate = payload => {
+    return {
+        type: CHANGE_DATE,
+        payload
+    }
+}
+
 export const SHOW_COMPONENT = 'show_component'
 export const showComponent = (payload, status) => {
     return {
@@ -80,7 +88,9 @@ export const showComponent = (payload, status) => {
 export default function reducer (state, action) {
 
     const newTasksAll = [...state.tasks.all]
+    const newTasksUpdate = [...state.tasks.update]
     const newTasksCompleted = [...state.tasks.completed]
+    let newTasksAfterChange;
 
     switch (action.type) {
 
@@ -110,7 +120,7 @@ export default function reducer (state, action) {
             }
 
         case EDIT_TASK:
-            let newTasksUpdateIsEdit = newTasksAll.map(task => {
+            newTasksAfterChange = newTasksAll.map(task => {
                 return {
                     ...task,
                     isEdit: action.payload.id === task.id ? action.status : false,
@@ -120,18 +130,21 @@ export default function reducer (state, action) {
                 ...state,
                 tasks: {
                     ...state.tasks,
-                    withoutUpdate: newTasksUpdateIsEdit,
-                    all: newTasksUpdateIsEdit
+                    withoutUpdate: newTasksAfterChange,
+                    all: newTasksAfterChange
                 },
             }
 
         case DELETE_TASK:
-            newTasksAll.splice(action.payload, 1)
+            const index = newTasksAll.findIndex(task => task.id === action.payload.id)
+            newTasksAll.splice(index, 1)
             return {
                 ...state,
                 tasks: {
                     ...state.tasks,
-                    all: newTasksAll
+                    all: newTasksAll,
+                    update: newTasksAll,
+                    withoutUpdate: newTasksAll,
                 }
             }
 
@@ -145,11 +158,18 @@ export default function reducer (state, action) {
             }
 
         case SAVE_ACTION:
+            newTasksAfterChange = newTasksUpdate.map(task => {
+                return {
+                    ...task,
+                    name: task.name.trim(),
+                    description: task.description.trim()
+                }
+            })
             return {
                 ...state,
                 tasks: {
                     ...state.tasks,
-                    all: [...state.tasks.update]
+                    all: newTasksAfterChange
                 }
             }
         
@@ -172,7 +192,7 @@ export default function reducer (state, action) {
             }
 
         case CHANGE_INFO:
-            let newTasksUpdateInfo = newTasksAll.map(task => {
+            newTasksAfterChange = newTasksAll.map(task => {
                 return {
                     ...task,
                     [action.payload.name]: action.payload.task.id === task.id ? action.payload.value : task[action.payload.name]
@@ -182,8 +202,24 @@ export default function reducer (state, action) {
                 ...state,
                 tasks: {
                     ...state.tasks,
-                    update: newTasksUpdateInfo
+                    update: newTasksAfterChange,
+                    all: newTasksAfterChange
                 }
             }
+
+            case CHANGE_DATE:
+                newTasksAfterChange = newTasksAll.map(task => {
+                    return {
+                        ...task,
+                        date: action.payload.task.id === task.id ? action.payload.value : task.date
+                    }
+                })
+                return {
+                    ...state,
+                    tasks: {
+                        ...state.tasks,
+                        update: newTasksAfterChange
+                    }
+                }
     }
 }

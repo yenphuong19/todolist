@@ -2,7 +2,6 @@ import React, { useContext, useRef } from 'react';
 import { Context } from 'services/Context';
 import styled from 'styled-components';
 import TaskEditor from 'components/TaskEditor';
-import Buttons from 'components/Buttons';
 import useOnClickOutSide from 'services/hook/useOnClickOutSide';
 
 const Wrapper = styled.div`
@@ -13,51 +12,52 @@ const Wrapper = styled.div`
     right: 0;
     display: flex;
     z-index: 5;
-    
-    
-    .overlay {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.1);
+`;
+
+const Overlay = styled.div`
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.05);
+`;
+
+const Body = styled.div`
+    box-shadow: 0 0 20px #c3c3c3;
+    margin: 200px auto auto;
+    width: 580px;
+    border-radius: 6px;
+    background-color: #fff;
+    z-index: 10;
+    animation: appear 0.2s ease-in-out;
+
+    form {
+        border: none;
     }
 
-    .body {
-        box-shadow: 0 0 10px #c3c3c3;
-        display: flex;
-        flex-direction: column;
-        margin: auto;
-        width: 580px;
-        border-radius: 6px;
-        background-color: #fff;
-        z-index: 10;
-        animation: appear 0.08s linear;
+    .buttons {
+        padding-right: 12px;
+    }
 
-        @media (max-width: 740px) {
-            margin: auto 10px;
-        }
-
-        .buttons {
-            margin: 16px 16px 0;
-        }
+    @media (max-width: 740px) {
+        margin: 200px 10px auto;
     }
 `;
 
 function Modal () {
     const [props] = useContext(Context)
+
     const modalRef = useRef()
+
     useOnClickOutSide(modalRef, () => props.setShowModal(false))
+
     return (
         <Wrapper>
-            <div className='overlay'></div>
-            <div className='body'>
+            <Overlay></Overlay>
+            <Body >
                 <div ref={modalRef}>
-                    <TaskEditor task={props.state.task}/>
+                    <TaskEditor task={props.state.task} dateDefault={new Date()}/>
                 </div>
-                <div className='buttons'>
-                    <Buttons task={props.state.task}/>
-                </div>
-            </div>
+            </Body>
         </Wrapper>
     )
 }

@@ -108,6 +108,18 @@ const tasks = [
         isEdit: false,
         dateCompleted: ''
     },
+    {
+        id: 9,
+        name: 'Lets go', 
+        description: '',
+        date: new Date(2022, 7, 10),
+        time: '',
+        repeat: 'None',
+        priority: 'High',
+        label: 'None',
+        isEdit: false,
+        dateCompleted: ''
+    },
 ]
 
 const initState = {

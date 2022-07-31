@@ -3,7 +3,20 @@ import { Context } from "services/Context";
 import Modal from "components/Modal";
 import { getListRender } from "services/todo";
 import TaskItem from "components/TaskItem";
+import { Images } from "constants";
+import styled from "styled-components";
+import styles from "react-day-picker/dist/style.css";
 
+const NoResult = styled.div`
+    padding-top: 20px;
+    width: 260px;
+    text-align: center;
+    margin: auto;
+
+    img {
+        padding-bottom: 20px;
+    }
+`;
 function Search () {
     const [props] = useContext(Context)
     const tasksResult = 
@@ -16,9 +29,8 @@ function Search () {
         })
        
     return (
-        <div>
+        <Fragment>
             <h2>Result for "{props.query}"</h2>
-            {props.showModal && <Modal />}
             {
                 tasksResult.length
                 ?
@@ -31,9 +43,12 @@ function Search () {
                         />
                     )
                 : 
-                <Fragment>No result</Fragment>
+                <NoResult>
+                    <img src={Images.NO_SEARCHRESULT} alt='no_result'></img>
+                    <span>No matches for “{props.query}”</span>
+                </NoResult>
             }
-        </div>
+        </Fragment>
     )
 }
 
