@@ -74,8 +74,6 @@ function Selector ({ task, nameSelector, optionsSelector, iconClassName }) {
     const [showCheckMark, setShowCheckMark] = useState(task[nameSelector])
     const [icon, setIcon] = useState(<i className={`${iconClassName}${iconColor ? '-fill' : ''}`} style={{color: `${iconColor ? iconColor : ''}`}}></i>)
     
-    console.log('render', showDropdownList)
-
     const handleClickButton = (e) => {
         console.log('click')
         e.preventDefault();
@@ -92,13 +90,12 @@ function Selector ({ task, nameSelector, optionsSelector, iconClassName }) {
     }
     
     useEffect(() => {
-        console.log('useEffect')
         button.current.addEventListener('click', handleClickButton)
         return () => {
             button.current.removeEventListener('click', handleClickButton)
         }
     }, [])
-    useOnClickOutSide(list, () => {console.log('outside');setShowDropdownList(false)})
+    useOnClickOutSide(list, () => setShowDropdownList(false))
 
     return (
         <Wrapper>

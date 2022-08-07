@@ -73,7 +73,6 @@ function DateSelector ({ task, dateDefault }) {
         props.dispatch(changeDate({ task, value: e || task.date })) :
         props.dispatch(setInfo({ name: 'date', value: e }))
     }
-    console.log(selectedDate)
 
     useEffect(() => {
         dateButton.current.addEventListener('click', handleClickDateButton)
