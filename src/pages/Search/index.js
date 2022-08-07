@@ -1,11 +1,8 @@
 import React, { Fragment, useContext } from "react";
-import { Context } from "services/Context";
-import Modal from "components/Modal";
-import { getListRender } from "services/todo";
+import { Context } from "services/context/Context";
 import TaskItem from "components/TaskItem";
 import { Images } from "constants";
 import styled from "styled-components";
-import styles from "react-day-picker/dist/style.css";
 
 const NoResult = styled.div`
     padding-top: 20px;
@@ -17,6 +14,7 @@ const NoResult = styled.div`
         padding-bottom: 20px;
     }
 `;
+
 function Search () {
     const [props] = useContext(Context)
     const tasksResult = 

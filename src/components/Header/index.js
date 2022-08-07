@@ -4,12 +4,13 @@ import styled from 'styled-components';
 
 import { Images } from 'constants/index';
 import { MODE_CREATE_WITH_MODAL } from 'constants/mode';
-import { Context } from 'services/Context';
+import { Context } from 'services/context/Context';
 import routes from 'services/routes';
 
-import SearchBox from './SearchBox';
+import SearchBox from '../../components/SearchBox';
 import Productivity from './Productivity';
 import { getDateContent } from 'services/todo';
+import useViewPort from 'services/hook/useViewPort';
 
 const Wrapper = styled.header`
     display: flex;
@@ -22,9 +23,9 @@ const Wrapper = styled.header`
     z-index: 2;
     background-color: rgba(3, 3, 3, 0.8);
 
-    @media (max-width: 740px) {
+    @media(max-width: 1023px)  {
         padding: 14px 10px;
-    } 
+    }
 `;
 
 const Button = styled.button`
@@ -46,6 +47,7 @@ const ProductivityQuantity = styled.span`
     color: #808080;
     padding-left: 6px;
 `;
+
 
 function Header () {
     const [props] = useContext(Context)
@@ -71,22 +73,24 @@ function Header () {
         props.setMode(MODE_CREATE_WITH_MODAL)
     }
 
-    console.log(totalTodayTask)
+    const viewPort = useViewPort()
+    const isMobile = viewPort.width <= 540
 
     return (
         <Wrapper>
             <div className="d-flex">
                 <Link to={routes.home}>
-                    <img src={Images.LOGO} alt="Logo" className='pe-4'></img>
+                    <img src={isMobile ? Images.LOGO : Images.LOGO_TEXT} alt="Logo" className='pe-4'></img>
                 </Link>
-                <SearchBox />
+                {<SearchBox />}       
             </div>
 
             <div className="d-flex justify-content-end">
-                <Button onClick={handleClickAddButton}>
-                    <i className="bi bi-plus-circle-fill"></i>
-                </Button>
-
+                {!isMobile &&
+                    <Button onClick={handleClickAddButton}>
+                        <i className="bi bi-plus-circle-fill"></i>
+                    </Button>
+                }
                 <div className='position-relative'>
                     <Button onClick={() => setShowProductivity(!showProductivity)}>
                         <i className="bi bi-arrow-up-right-circle-fill"></i>

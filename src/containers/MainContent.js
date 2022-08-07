@@ -1,6 +1,6 @@
 import React, { Fragment, useContext } from "react";
 import styled from "styled-components";
-import { Context } from "services/Context";
+import { Context } from "services/context/Context";
 import { Routes, Route } from 'react-router-dom';
 import routes from 'services/routes';
 
@@ -21,8 +21,14 @@ const Wrapper = styled.div`
 
     .list-container {
         max-width: 800px;
-        margin: 0 auto;
         padding: 0 10px;
+        margin: 0 auto;
+        min-height: 100vh;
+    }
+
+    .col-md-3 ,
+    .col-md-9 {
+        padding: 0;
     }
 `;
 
@@ -32,8 +38,10 @@ function MainContent () {
     return (
         <Fragment>
             <Wrapper className="bg-gradient row m-0">
-                <SideBar />
-                <div className="col-9">
+                <div className="col-md-3">
+                    <SideBar />
+                </div>
+                <div className="col-md-9">
                     <div className="list-container">
                         <Routes>
                             <Route path={routes.home} element={<Today />}/>

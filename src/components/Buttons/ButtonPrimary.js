@@ -1,6 +1,5 @@
-import { useState, useContext, useEffect } from 'react';
-import { Context } from 'services/Context';
-import { addTask, editTask, saveAction, setInfo } from 'services/reducer';
+import { useContext } from 'react';
+import { Context } from 'services/context/Context';
 import { MODE_CREATE, MODE_CREATE_WITH_MODAL } from 'constants/mode';
 import styled from 'styled-components';
 

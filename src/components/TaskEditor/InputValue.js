@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import { Context } from 'services/Context';
-import { changeInfo, setInfo } from 'services/reducer';
+import { Context } from 'services/context/Context';
+import { changeInfo, setInfo } from 'services/reducer/actions';
 import { MODE_EDIT } from 'constants/mode';
 
 function InputValue ({ task, inputName }) {

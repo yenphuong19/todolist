@@ -38,7 +38,7 @@ const tasks = [
     },
     {
         id: 3,
-        name: 'Shopping', 
+        name: 'Send report', 
         description: '',
         date: new Date(2022, 8, 10),
         time: '',
@@ -62,7 +62,7 @@ const tasks = [
     },
     {
         id: 5,
-        name: 'Study hard, play hard', 
+        name: 'Finish presentation', 
         description: '',
         date: new Date(2022, 6, 12),
         time: '',
@@ -86,36 +86,12 @@ const tasks = [
     },
     {
         id: 7,
-        name: 'Cooking', 
+        name: 'Update calendar', 
         description: '',
         date: new Date(),
         time: '',
         repeat: 'None',
         priority: 'None',
-        label: 'None',
-        isEdit: false,
-        dateCompleted: ''
-    },
-    {
-        id: 8,
-        name: 'Dot dot dot', 
-        description: '',
-        date: new Date(2022, 8, 10),
-        time: '',
-        repeat: 'None',
-        priority: 'None',
-        label: 'None',
-        isEdit: false,
-        dateCompleted: ''
-    },
-    {
-        id: 9,
-        name: 'Lets go', 
-        description: '',
-        date: new Date(2022, 7, 10),
-        time: '',
-        repeat: 'None',
-        priority: 'High',
         label: 'None',
         isEdit: false,
         dateCompleted: ''

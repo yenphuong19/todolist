@@ -1,6 +1,6 @@
 import React, { useState, useReducer } from 'react';
-import initState from './initState';
-import reducer from './reducer';
+import initState from '../reducer/initState';
+import reducer from '../reducer/actions';
 import { FILTER_ACTIVE } from 'constants/filter'
 import { MODE_NONE } from 'constants/mode';
 import { Context } from './Context';

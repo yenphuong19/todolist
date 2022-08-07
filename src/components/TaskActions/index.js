@@ -1,9 +1,8 @@
-import React, { useState, useContext, useEffect, useRef } from 'react';
-import { Context } from 'services/Context';
-import { editTask, deleteTask, completedAction, changeInfo } from 'services/reducer';
+import React, { useContext, useEffect, useRef } from 'react';
+import { Context } from 'services/context/Context';
+import { editTask, deleteTask, completedAction } from 'services/reducer/actions';
 import { MODE_EDIT } from 'constants/mode';
 import styled from 'styled-components';
-import Toast from 'components/Toast';
 import { Actions } from 'constants/action';
 
 const Wrapper = styled.div`

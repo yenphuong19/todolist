@@ -1,4 +1,4 @@
-import { getNewId  } from "./todo"
+import { getNewId  } from "../todo"
 
 // Action
 export const SET_INFO = 'set_info'
@@ -82,7 +82,6 @@ export const showComponent = (payload, status) => {
         status
     }
 }
-
 
 // Reducer
 export default function reducer (state, action) {

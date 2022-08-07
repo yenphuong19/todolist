@@ -1,6 +1,6 @@
 import { memo, useState, useContext, useRef } from 'react';
 import { MODE_NONE, MODE_SEARCH } from 'constants/mode'
-import { Context } from 'services/Context';
+import { Context } from 'services/context/Context';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import routes from 'services/routes';
@@ -72,7 +72,6 @@ function SearchBox() {
             className="d-flex align-items-center"
             onSubmit={handleSubmitSearch}
         >
-            {/* {console.log('render')} */}
             <i className="bi bi-search" style={{color: '#fff', fontSize: '1.6rem'}}></i>
             <Input 
                 ref={inputRef}

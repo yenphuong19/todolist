@@ -1,7 +1,7 @@
 import React, { useContext, useRef } from 'react';
-import { Context } from 'services/Context';
+import { Context } from 'services/context/Context';
 import { MODE_CREATE } from 'constants/mode';
-import { setInfo } from 'services/reducer';
+import { setInfo } from 'services/reducer/actions';
 import TaskEditor from 'components/TaskEditor';
 import styled from 'styled-components';
 import { getDateContent } from 'services/todo';

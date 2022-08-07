@@ -1,7 +1,7 @@
 import { useContext } from 'react';
-import { Context } from 'services/Context';
+import { Context } from 'services/context/Context';
 import { MODE_NONE } from 'constants/mode';
-import { cancelAction, editTask } from 'services/reducer';
+import { cancelAction, editTask } from 'services/reducer/actions';
 import styled from 'styled-components';
 
 const Button = styled.button`

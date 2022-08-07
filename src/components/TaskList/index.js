@@ -1,10 +1,8 @@
-import { useContext, useState } from 'react';
-import { Context } from 'services/Context';
-import { getDateContent, getListRender } from 'services/todo';
-import { format } from 'date-fns';
+import { useContext } from 'react';
+import { Context } from 'services/context/Context';
+import { getDateContent } from 'services/todo';
 import TaskItem from 'components/TaskItem';
 import TaskAdd from 'components/TaskAdd';
-import styled from 'styled-components';
 
 function TaskList ({ tasks, sectionHeader, isOverdue }) {
     const [props] = useContext(Context)

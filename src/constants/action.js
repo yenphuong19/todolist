@@ -1,11 +1,11 @@
 export const Actions = {
     completed: {
-        message: 'Task completed!'
+        message: 'Task completed'
     },
     add: {
-        message: 'New task is added!'
+        message: 'New task is added'
     },
     delete: {
-        message: 'Task delete!'
+        message: 'Task delete'
     }
 }

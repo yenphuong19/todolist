@@ -1,11 +1,6 @@
 import { useContext } from 'react';
-import { Context } from 'services/Context';
-import { MODE_CREATE } from 'constants/mode';
-import { format } from 'date-fns';
+import { Context } from 'services/context/Context';
 import styled from 'styled-components';
-import TaskList from 'components/TaskList';
-import Modal from 'components/Modal';
-import TaskItem from 'components/TaskItem';
 import TaskCompleted from 'components/TaskCompleted';
 import { Images } from 'constants';
 

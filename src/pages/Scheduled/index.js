@@ -1,10 +1,6 @@
 import React, { Fragment, useContext } from 'react';
-import { Context } from 'services/Context';
-import { MODE_CREATE } from 'constants/mode';
-import { format } from 'date-fns';
-import styled from 'styled-components';
+import { Context } from 'services/context/Context';
 import TaskList from 'components/TaskList';
-import Modal from 'components/Modal';
 import { getListRender, uniqueArray } from 'services/todo';
 
 function Scheduled () {

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Context } from 'services/Context';
+import { Context } from 'services/context/Context';
 import { getDateContent } from 'services/todo';
 import { PRIORITY_OPTIONS, LABEL_OPTIONS } from 'constants/index';
 import TaskActions from '../TaskActions/index';

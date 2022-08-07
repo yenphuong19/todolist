@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { MODE_NONE } from 'constants/mode';
 import styled from 'styled-components';
-import { Context } from 'services/Context';
+import { Context } from 'services/context/Context';
 import routes from 'services/routes';
 
 const Wrapper = styled.ul`
@@ -11,7 +11,6 @@ const Wrapper = styled.ul`
 
     li {
         display: flex;
-        justify-content: space-between;
         align-items: center;
         height: 60px;
         padding: 0 10px;
@@ -24,6 +23,9 @@ const Wrapper = styled.ul`
         background-color: #fff;
 
         a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             flex: 1;
             color: #333;
             text-decoration: none;
@@ -31,6 +33,7 @@ const Wrapper = styled.ul`
             span {
                 padding-right: 6px;
                 font-size: 1.6rem;
+                line-height: 100%;
             }
         }
        
@@ -41,9 +44,21 @@ const Wrapper = styled.ul`
 
     }
 
-    @media (max-width: 840px) {
+    @media(max-width: 1023px) and (min-width: 769px) {
+        padding: 0;
+    }
+
+    @media (max-width: 768px) {
         padding: 0;
         margin-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+        height: auto;
+
+        li {
+            width: 32%;
+            max-width: 150px;
+        }
         
         .hide {
             display: none;
@@ -52,8 +67,9 @@ const Wrapper = styled.ul`
     
 `
 
-const CountItem = styled.span`
-    background-color: #eceff1;
+const CountItem = styled.div`
+    // background-color: #eceff1;
+    font-size: 2rem;
     border-radius: 6px;
     padding: 2px 8px;
     color: ${props => props.color}
@@ -83,26 +99,30 @@ function SideBar () {
     const [props] = useContext(Context)
 
     return (
-        <Wrapper className='col-3'>
+        <Wrapper>
             {
                 SIDEBAR_LIST.map( (item, index) => (
                     <li key={index} onClick={() => props.setMode(MODE_NONE)}>
                         <Link to={item.path}>
-                            <span className='hide'>{item.icon}</span>
-                            {item.title}
+                            <div>
+                                <span className='hide'>{item.icon}</span>
+                                {item.title}
+                            </div>
+                            {
+                                <CountItem color={item.quantityColor || '#333'}>
+                                    {props.state.tasks.all.filter(task => {
+                                        switch (item.title) {
+                                            case 'Today':
+                                                return task.date.toDateString() === new Date().toDateString();
+                                            case 'Scheduled':
+                                                return task.date > new Date();
+                                            default:
+                                                return task.date
+                                        }
+                                    }).length}
+                                </CountItem>
+                            }
                         </Link>
-                        <CountItem color={item.quantityColor || '#333'}>
-                            {props.state.tasks.all.filter(task => {
-                                switch (item.title) {
-                                    case 'Today':
-                                        return task.date.toDateString() === new Date().toDateString();
-                                    case 'Scheduled':
-                                        return task.date > new Date();
-                                    default:
-                                        return task.date
-                                }
-                            }).length}
-                        </CountItem>
                     </li>
                 ))
             }

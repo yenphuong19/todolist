@@ -1,13 +1,11 @@
 import React, { Fragment, useContext } from 'react';
-import { Context } from 'services/Context';
-import { MODE_CREATE } from 'constants/mode';
+import { Context } from 'services/context/Context';
 import { Images } from 'constants/index';
 import { format } from 'date-fns';
 import styled from 'styled-components';
 import TaskList from 'components/TaskList';
 import TaskAdd from 'components/TaskAdd';
-import Modal from 'components/Modal';
-import { getDateContent, getListRender } from 'services/todo';
+import { getListRender } from 'services/todo';
 
 const Header = styled.h1`
     color: blue;

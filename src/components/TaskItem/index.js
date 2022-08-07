@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Context } from 'services/Context';
+import { Context } from 'services/context/Context';
 import { MODE_EDIT } from 'constants/mode';
 import TaskEditor from '../TaskEditor';
 import TaskView from '../TaskView';

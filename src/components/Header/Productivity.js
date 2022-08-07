@@ -1,12 +1,10 @@
-import { useContext, useRef } from 'react';
+import { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Context } from 'services/Context';
 import routes from 'services/routes';
 import styled from 'styled-components';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import useOnClickOutSide from 'services/hook/useOnClickOutSide';
-import { Images } from 'constants';
 
 const Wrapper = styled.div`
     border-radius: 6px;
@@ -49,7 +47,6 @@ const SectionProgress = styled.div`
     .count {
         font-weight: 600;
     }
-
     
 `;
 

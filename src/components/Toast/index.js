@@ -1,5 +1,4 @@
-import React, { useContext } from "react";
-import { Context } from "services/Context";
+import React from "react";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -12,10 +11,10 @@ const Wrapper = styled.div`
     top: 80px;
     right: 10px;
     max-width: 200px;
-    height: 40px;
+    height: 50px;
     padding-left: 10px;
     
-    background-color: rgba(3, 3, 3, 0.8);
+    background-color: rgba(3, 3, 3, 0.7);
     color: #fff;
     
     border-radius: 4px;

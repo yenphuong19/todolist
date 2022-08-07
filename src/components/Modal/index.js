@@ -1,5 +1,5 @@
 import React, { useContext, useRef } from 'react';
-import { Context } from 'services/Context';
+import { Context } from 'services/context/Context';
 import styled from 'styled-components';
 import TaskEditor from 'components/TaskEditor';
 import useOnClickOutSide from 'services/hook/useOnClickOutSide';

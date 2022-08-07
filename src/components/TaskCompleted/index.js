@@ -2,14 +2,12 @@ import { getDateContent } from 'services/todo';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-    // display: flex;
     border-bottom: 1px solid #ddd;
     padding: 10px 0;
 `;
 
 
 function TaskCompleted ({ task }) {
-    console.log(task)
     return (
         <Wrapper>
             <i class="bi bi-calendar-check-fill" style={{color: '#32C200', fontSize: '2rem', paddingRight: '10px'}}></i>

@@ -1,8 +1,8 @@
 import { useState, useContext, useEffect, useRef } from 'react';
-import { changeInfo, setInfo } from 'services/reducer';
+import { changeInfo, setInfo } from 'services/reducer/actions';
 import { REPEAT_OPTIONS } from 'constants/repeat';
 import useOnClickOutSide from 'services/hook/useOnClickOutSide';
-import { Context } from 'services/Context';
+import { Context } from 'services/context/Context';
 import styled from 'styled-components';
 import { MODE_EDIT } from 'constants/mode';
 

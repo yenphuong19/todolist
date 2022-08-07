@@ -1,7 +1,7 @@
 import React, { memo, useState, useContext, useEffect, useRef } from 'react';
-import { Context } from 'services/Context';
+import { Context } from 'services/context/Context';
 import { getDateContent } from 'services/todo';
-import { changeDate, setInfo } from 'services/reducer';
+import { changeDate, setInfo } from 'services/reducer/actions';
 import { DayPicker } from 'react-day-picker';
 import useOnClickOutSide from 'services/hook/useOnClickOutSide';
 import 'react-day-picker/dist/style.css';

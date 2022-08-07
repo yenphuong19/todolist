@@ -1,6 +1,6 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { Context } from "services/Context";
-import { changeInfo, setInfo } from "services/reducer";
+import { Context } from "services/context/Context";
+import { changeInfo, setInfo } from "services/reducer/actions";
 import useOnClickOutSide from "services/hook/useOnClickOutSide";
 import styled from 'styled-components';
 import { MODE_EDIT } from "constants/mode";
